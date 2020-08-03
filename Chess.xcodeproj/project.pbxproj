@@ -8,23 +8,60 @@
 
 /* Begin PBXBuildFile section */
 		91E80C3424D5CFAE003AEFE2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E80C3324D5CFAE003AEFE2 /* main.cpp */; };
+		91E80C3C24D5CFDB003AEFE2 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E80C3B24D5CFDB003AEFE2 /* OpenGL.framework */; };
+		91E80C3F24D5D042003AEFE2 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E80C3E24D5D042003AEFE2 /* libglfw.3.3.dylib */; };
+		91E80C4024D5D042003AEFE2 /* libglfw.3.3.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 91E80C3E24D5D042003AEFE2 /* libglfw.3.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		91E80C4B24D78848003AEFE2 /* renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E80C4924D78848003AEFE2 /* renderer.cpp */; };
+		91E80C4E24D79710003AEFE2 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E80C4C24D79710003AEFE2 /* game.cpp */; };
+		91E80C5124D7971F003AEFE2 /* board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E80C4F24D7971F003AEFE2 /* board.cpp */; };
+		91E80C5424D79C05003AEFE2 /* resource_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E80C5224D79C05003AEFE2 /* resource_manager.cpp */; };
+		91E80C5724D79D6D003AEFE2 /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E80C5524D79D6D003AEFE2 /* shader.cpp */; };
+		91E80C5A24D79D7D003AEFE2 /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E80C5824D79D7D003AEFE2 /* texture.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		91E80C2E24D5CFAE003AEFE2 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		91E80C4124D5D042003AEFE2 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				91E80C4024D5D042003AEFE2 /* libglfw.3.3.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		91E80C3024D5CFAE003AEFE2 /* Chess */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Chess; sourceTree = BUILT_PRODUCTS_DIR; };
 		91E80C3324D5CFAE003AEFE2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		91E80C3B24D5CFDB003AEFE2 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		91E80C3D24D5D001003AEFE2 /* Chess.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Chess.entitlements; sourceTree = "<group>"; };
+		91E80C3E24D5D042003AEFE2 /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../../usr/local/Cellar/glfw/3.3/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
+		91E80C4924D78848003AEFE2 /* renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = renderer.cpp; sourceTree = "<group>"; };
+		91E80C4A24D78848003AEFE2 /* renderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = renderer.hpp; sourceTree = "<group>"; };
+		91E80C4C24D79710003AEFE2 /* game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
+		91E80C4D24D79710003AEFE2 /* game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = game.hpp; sourceTree = "<group>"; };
+		91E80C4F24D7971F003AEFE2 /* board.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = board.cpp; sourceTree = "<group>"; };
+		91E80C5024D7971F003AEFE2 /* board.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = board.hpp; sourceTree = "<group>"; };
+		91E80C5224D79C05003AEFE2 /* resource_manager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = resource_manager.cpp; sourceTree = "<group>"; };
+		91E80C5324D79C05003AEFE2 /* resource_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = resource_manager.hpp; sourceTree = "<group>"; };
+		91E80C5524D79D6D003AEFE2 /* shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shader.cpp; sourceTree = "<group>"; };
+		91E80C5624D79D6D003AEFE2 /* shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = shader.hpp; sourceTree = "<group>"; };
+		91E80C5824D79D7D003AEFE2 /* texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture.cpp; sourceTree = "<group>"; };
+		91E80C5924D79D7D003AEFE2 /* texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = texture.hpp; sourceTree = "<group>"; };
+		91E80C5D24D7A9EB003AEFE2 /* board.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = board.frag; sourceTree = "<group>"; };
+		91E80C5E24D7A9EC003AEFE2 /* board.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = board.vert; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +69,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91E80C3F24D5D042003AEFE2 /* libglfw.3.3.dylib in Frameworks */,
+				91E80C3C24D5CFDB003AEFE2 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +82,7 @@
 			children = (
 				91E80C3224D5CFAE003AEFE2 /* Chess */,
 				91E80C3124D5CFAE003AEFE2 /* Products */,
+				91E80C3A24D5CFDB003AEFE2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,9 +97,49 @@
 		91E80C3224D5CFAE003AEFE2 /* Chess */ = {
 			isa = PBXGroup;
 			children = (
+				91E80C4324D617D9003AEFE2 /* Assets */,
+				91E80C4224D617C5003AEFE2 /* Shaders */,
+				91E80C3D24D5D001003AEFE2 /* Chess.entitlements */,
 				91E80C3324D5CFAE003AEFE2 /* main.cpp */,
+				91E80C4924D78848003AEFE2 /* renderer.cpp */,
+				91E80C4A24D78848003AEFE2 /* renderer.hpp */,
+				91E80C4C24D79710003AEFE2 /* game.cpp */,
+				91E80C4D24D79710003AEFE2 /* game.hpp */,
+				91E80C4F24D7971F003AEFE2 /* board.cpp */,
+				91E80C5024D7971F003AEFE2 /* board.hpp */,
+				91E80C5224D79C05003AEFE2 /* resource_manager.cpp */,
+				91E80C5324D79C05003AEFE2 /* resource_manager.hpp */,
+				91E80C5524D79D6D003AEFE2 /* shader.cpp */,
+				91E80C5624D79D6D003AEFE2 /* shader.hpp */,
+				91E80C5824D79D7D003AEFE2 /* texture.cpp */,
+				91E80C5924D79D7D003AEFE2 /* texture.hpp */,
 			);
 			path = Chess;
+			sourceTree = "<group>";
+		};
+		91E80C3A24D5CFDB003AEFE2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				91E80C3E24D5D042003AEFE2 /* libglfw.3.3.dylib */,
+				91E80C3B24D5CFDB003AEFE2 /* OpenGL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		91E80C4224D617C5003AEFE2 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				91E80C5D24D7A9EB003AEFE2 /* board.frag */,
+				91E80C5E24D7A9EC003AEFE2 /* board.vert */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
+		91E80C4324D617D9003AEFE2 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -72,6 +152,7 @@
 				91E80C2C24D5CFAE003AEFE2 /* Sources */,
 				91E80C2D24D5CFAE003AEFE2 /* Frameworks */,
 				91E80C2E24D5CFAE003AEFE2 /* CopyFiles */,
+				91E80C4124D5D042003AEFE2 /* Embed Libraries */,
 			);
 			buildRules = (
 			);
@@ -119,7 +200,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91E80C5724D79D6D003AEFE2 /* shader.cpp in Sources */,
+				91E80C4B24D78848003AEFE2 /* renderer.cpp in Sources */,
 				91E80C3424D5CFAE003AEFE2 /* main.cpp in Sources */,
+				91E80C5424D79C05003AEFE2 /* resource_manager.cpp in Sources */,
+				91E80C5A24D79D7D003AEFE2 /* texture.cpp in Sources */,
+				91E80C5124D7971F003AEFE2 /* board.cpp in Sources */,
+				91E80C4E24D79710003AEFE2 /* game.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,20 +325,44 @@
 		91E80C3824D5CFAE003AEFE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Chess/Chess.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MXYX4524CL;
 				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glfw/3.3/include,
+					/usr/local/include/glm,
+					"/Users/ianholdeman/Downloads/stb-master",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glfw/3.3/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
 		91E80C3924D5CFAE003AEFE2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Chess/Chess.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MXYX4524CL;
 				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glfw/3.3/include,
+					/usr/local/include/glm,
+					"/Users/ianholdeman/Downloads/stb-master",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glfw/3.3/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
