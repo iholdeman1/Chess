@@ -6,8 +6,6 @@
 //  Copyright © 2020 Marvin LLC. All rights reserved.
 //
 
-// Library Includes
-
 // Local Includes
 #include "renderer.hpp"
 

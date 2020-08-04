@@ -8,14 +8,14 @@
 
 #include "resource_manager.hpp"
 
+// Library Includes
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
 // System Includes
 #include <iostream>
 #include <sstream>
 #include <fstream>
-
-// Local Includes
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
 
 // Instantiate static variables
 std::map<std::string, Shader> ResourceManager::shaders;
