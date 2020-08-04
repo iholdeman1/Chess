@@ -13,12 +13,16 @@
 #include <GLFW/glfw3.h>
 #include <OpenGL/gl3.h>
 
-class Texture2D {
+// System Includes
+#include <stdint.h>
+
+class Texture2D
+{
 public:
-  Texture2D();
+  Texture2D(const int width = 0, const int height = 0);
   
-  void generate(const unsigned int width, const unsigned int height, unsigned char *data);
-  void bind() const;
+  void generate(unsigned char *data);
+  void bind();
 
   void set_alpha_format();
 
@@ -30,18 +34,12 @@ private:
   unsigned int id_;
   
   // Texture image dimensions
-  unsigned int width_;
-  unsigned int height_;
+  int width_;
+  int height_;
   
   // Texture Format
-  unsigned int internal_format_; // Format of texture object
-  unsigned int image_format_; // Format of loaded image
-  
-  // Texture configuration
-  unsigned int wrap_s_; // Wrapping mode on S axis
-  unsigned int wrap_t_; // Wrapping mode on T axis
-  unsigned int filter_min_; // Filtering mode if texture pixels < screen pixels
-  unsigned int filter_max_; // Filtering mode if texture pixels > screen pixels
+  unsigned int image_format_ = GL_RGB; // Format of loaded image
+  unsigned int internal_format_ = GL_RGB; // Format of texture object
 };
 
 #endif /* texture_hpp */

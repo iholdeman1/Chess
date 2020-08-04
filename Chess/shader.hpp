@@ -17,9 +17,10 @@
 // System Includes
 #include <string>
 
-class Shader {
+class Shader
+{
 public:
-  Shader();
+  Shader() = default;
   
   void use();
   void compile(const char *vertexSource, const char *fragmentSource, const char *geometrySource);

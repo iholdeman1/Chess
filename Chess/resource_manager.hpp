@@ -26,7 +26,8 @@
 // and/or shader is also stored for future reference by string
 // handles. All functions and resources are static and no
 // public constructor is defined.
-class ResourceManager {
+class ResourceManager
+{
 public:
   // Resource storage
   static std::map<std::string, Shader> shaders;
@@ -36,13 +37,13 @@ public:
   static void load_shader(const char *vShaderFile, const char *fShaderFile, const char *gShaderFile, std::string name);
   
   // Retrieves a stored sader
-  static Shader get_shader(std::string name);
+  static Shader get_shader(const std::string name);
   
   // Loads (and generates) a texture from file
-  static void load_texture(const char *file, bool alpha, std::string name);
+  static void load_texture(const char *file, bool alpha, const std::string name);
   
   // Retrieves a stored texture
-  static Texture2D get_texture(std::string name);
+  static Texture2D get_texture(const std::string name);
   
   // Properly de-allocates all loaded resources
   static void clear();
