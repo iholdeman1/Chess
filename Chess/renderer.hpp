@@ -19,7 +19,8 @@
 // Local Includes
 #include "resource_manager.hpp"
 
-class Renderer {
+class Renderer
+{
 public:
   Renderer();
   ~Renderer();

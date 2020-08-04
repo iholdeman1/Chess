@@ -8,8 +8,6 @@
 
 #include "board.hpp"
 
-#include <iostream>
-
 Board::Board(const uint32_t width, const uint32_t height) : width_(width), height_(height)
 {
   square_size_ = width_ / 8;

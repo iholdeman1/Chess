@@ -8,59 +8,68 @@
 
 #include "resource_manager.hpp"
 
+// Library Includes
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
 // System Includes
 #include <iostream>
 #include <sstream>
 #include <fstream>
-
-// Local Includes
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
 
 // Instantiate static variables
 std::map<std::string, Shader> ResourceManager::shaders;
 std::map<std::string, Texture2D> ResourceManager::textures;
 
 void ResourceManager::load_shader(const char *vertex_shader_file,
-                                    const char *fragment_shader_file,
-                                    const char *geometry_shader_file,
-                                    std::string name) {
+                                  const char *fragment_shader_file,
+                                  const char *geometry_shader_file,
+                                  std::string name)
+{
   shaders[name] = load_shader_from_file(vertex_shader_file, fragment_shader_file, geometry_shader_file);
 }
 
-Shader ResourceManager::get_shader(std::string name) {
+Shader ResourceManager::get_shader(const std::string name)
+{
   return shaders[name];
 }
 
-void ResourceManager::load_texture(const char *file, bool alpha, std::string name) {
+void ResourceManager::load_texture(const char *file, bool alpha, const std::string name)
+{
   textures[name] = load_texture_from_file(file, alpha);
 }
 
-Texture2D ResourceManager::get_texture(std::string name) {
+Texture2D ResourceManager::get_texture(const std::string name)
+{
   return textures[name];
 }
 
-void ResourceManager::clear() {
+void ResourceManager::clear()
+{
   // Delete all shaders
-  for (auto iter : shaders) {
+  for (auto iter : shaders)
+  {
     glDeleteProgram(iter.second.get_id());
   }
   
   // Delete all textures
-  for (auto iter : textures) {
+  for (auto iter : textures)
+  {
     glDeleteTextures(1, &iter.second.get_id_ref());
   }
 }
 
 Shader ResourceManager::load_shader_from_file(const char *vertex_shader_file,
                                               const char *fragment_shader_file,
-                                              const char *geometry_shader_file) {
+                                              const char *geometry_shader_file)
+{
   // 1. Retrieve the vertex/fragment source code from file path
   std::string vertex_code;
   std::string fragment_code;
   std::string geometry_code;
 
-  try {
+  try
+  {
     // Open files
     std::ifstream vertexShaderFile(vertex_shader_file);
     std::ifstream fragmentShaderFile(fragment_shader_file);
@@ -79,7 +88,8 @@ Shader ResourceManager::load_shader_from_file(const char *vertex_shader_file,
     fragment_code = fShaderStream.str();
     
     // If geometry shader path is present, also load a geometry shader
-    if (geometry_shader_file != nullptr) {
+    if (geometry_shader_file != nullptr)
+    {
       std::ifstream geometryShaderFile(geometry_shader_file);
       std::stringstream gShaderStream;
       gShaderStream << geometryShaderFile.rdbuf();
@@ -87,36 +97,45 @@ Shader ResourceManager::load_shader_from_file(const char *vertex_shader_file,
       geometry_code = gShaderStream.str();
     }
   }
-  catch (std::exception e) {
-    std::cout << "ERROR::SHADER: Failed to read shader files\n";
+  catch (std::exception e)
+  {
+    std::cerr << "ERROR::SHADER: Failed to read shader files\n";
   }
   
   // 2. Now create shader object from source code
   Shader shader;
-  shader.compile(vertex_code.c_str(), fragment_code.c_str(), geometry_shader_file != nullptr ? geometry_code.c_str() : nullptr);
+  shader.compile(vertex_code.c_str(), fragment_code.c_str(),
+                 geometry_shader_file != nullptr ? geometry_code.c_str() : nullptr);
   return shader;
 }
 
-Texture2D ResourceManager::load_texture_from_file(const char *file, bool alpha) {
-  // Create texture object
-  Texture2D texture;
-  if (alpha) {
-    texture.set_alpha_format();
-  }
-  
+Texture2D ResourceManager::load_texture_from_file(const char *file, bool alpha)
+{
   // Load image
-  int width, height, nrChannels;
+  int width;
+  int height;
+  int nrChannels;
   unsigned char *data = stbi_load(file, &width, &height, &nrChannels, 0);
   
-  if (data) {
+  if (data)
+  {
     std::cerr << "Loaded texture data: " << file << "\n";
   }
-  else {
+  else
+  {
     std::cerr << "Failed to load texture data: " << file << "\n";
   }
   
+  // Create texture object
+  Texture2D texture = Texture2D(width, height);
+  
+  if (alpha)
+  {
+    texture.set_alpha_format();
+  }
+  
   // Now generate texture
-  texture.generate(width, height, data);
+  texture.generate(data);
   
   // Free image data
   stbi_image_free(data);
