@@ -19,7 +19,7 @@ public:
   Texture2D(const int width = 0, const int height = 0);
   
   void generate(unsigned char *data);
-  void bind();
+  void bind() const;
 
   void set_alpha_format();
 

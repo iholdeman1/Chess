@@ -23,7 +23,8 @@ public:
   void render(Renderer *renderer);
 
 private:
-  uint32_t width_, height_;
+  uint32_t width_;
+  uint32_t height_;
   uint32_t square_size_;
 };
 
