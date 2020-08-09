@@ -11,9 +11,11 @@
 
 // System Includes
 #include <stdint.h>
+#include <string>
 
 // Local Includes
 #include "board.hpp"
+#include "piece_manager.hpp"
 #include "renderer.hpp"
 #include "resource_manager.hpp"
 
@@ -31,6 +33,7 @@ private:
   uint32_t width_, height_;
   Board *board_ = nullptr;
   Renderer *renderer_ = nullptr;
+  PieceManager *piece_manager_ = nullptr;
 };
 
 #endif /* game_hpp */

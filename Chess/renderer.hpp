@@ -28,6 +28,9 @@ public:
   void render_basic_object(const glm::vec2& position, const glm::vec2& size,
                            const glm::vec3& color, const float rotate);
   
+  void render_textured_object(const Texture2D& texture, const glm::vec2& position,
+                              const glm::vec2& size, const glm::vec3& color, const float rotate);
+  
 private:
   glm::mat4 generate_model_matrix(const glm::vec2& position, const glm::vec2& size, const float rotate);
   

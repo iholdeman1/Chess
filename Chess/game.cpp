@@ -21,8 +21,42 @@ Game::Game(const uint32_t width, const uint32_t height) : width_(width), height_
   ResourceManager::get_shader("board").use();
   ResourceManager::get_shader("board").set_matrix4("projection", projection);
   
+  // Set up the texture shader
+  ResourceManager::load_shader("/Users/ianholdeman/Desktop/Develop/Chess/Chess/Shaders/texture.vert",
+                               "/Users/ianholdeman/Desktop/Develop/Chess/Chess/Shaders/texture.frag",
+                               nullptr, "texture");
+  ResourceManager::get_shader("texture").use();
+  ResourceManager::get_shader("texture").set_matrix4("projection", projection);
+  
+  // Load textures
+  ResourceManager::load_texture("/Users/ianholdeman/Desktop/Develop/Chess/Chess/Assets/white_king_100.png",
+                                true, "white_king");
+  ResourceManager::load_texture("/Users/ianholdeman/Desktop/Develop/Chess/Chess/Assets/white_queen_100.png",
+                                true, "white_queen");
+  ResourceManager::load_texture("/Users/ianholdeman/Desktop/Develop/Chess/Chess/Assets/white_knight_100.png",
+                                true, "white_knight");
+  ResourceManager::load_texture("/Users/ianholdeman/Desktop/Develop/Chess/Chess/Assets/white_rook_100.png",
+                                true, "white_rook");
+  ResourceManager::load_texture("/Users/ianholdeman/Desktop/Develop/Chess/Chess/Assets/white_bishop_100.png",
+                                true, "white_bishop");
+  ResourceManager::load_texture("/Users/ianholdeman/Desktop/Develop/Chess/Chess/Assets/white_pawn_100.png",
+                                true, "white_pawn");
+  ResourceManager::load_texture("/Users/ianholdeman/Desktop/Develop/Chess/Chess/Assets/black_king_100.png",
+                                true, "black_king");
+  ResourceManager::load_texture("/Users/ianholdeman/Desktop/Develop/Chess/Chess/Assets/black_queen_100.png",
+                                true, "black_queen");
+  ResourceManager::load_texture("/Users/ianholdeman/Desktop/Develop/Chess/Chess/Assets/black_knight_100.png",
+                                true, "black_knight");
+  ResourceManager::load_texture("/Users/ianholdeman/Desktop/Develop/Chess/Chess/Assets/black_rook_100.png",
+                                true, "black_rook");
+  ResourceManager::load_texture("/Users/ianholdeman/Desktop/Develop/Chess/Chess/Assets/black_bishop_100.png",
+                                true, "black_bishop");
+  ResourceManager::load_texture("/Users/ianholdeman/Desktop/Develop/Chess/Chess/Assets/black_pawn_100.png",
+                                true, "black_pawn");
+  
   // Create the board
   board_ = new Board(width_, height_);
+  piece_manager_ = new PieceManager(width_ / 8);
   
   // Create the renderer
   renderer_ = new Renderer();
@@ -47,4 +81,5 @@ void Game::update(const float delta_time)
 void Game::render()
 {
   board_->render(renderer_);
+  piece_manager_->render(renderer_);
 }

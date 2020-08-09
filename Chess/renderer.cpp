@@ -49,8 +49,8 @@ Renderer::~Renderer()
   glDeleteVertexArrays(1, &vao_);
 }
 
-void Renderer::render_basic_object(const glm::vec2 &position, const glm::vec2 &size,
-                              const glm::vec3 &color, const float rotate)
+void Renderer::render_basic_object(const glm::vec2& position, const glm::vec2& size,
+                                   const glm::vec3& color, const float rotate)
 {
   // Disable texture attribute
   glBindVertexArray(vao_);
@@ -69,7 +69,31 @@ void Renderer::render_basic_object(const glm::vec2 &position, const glm::vec2 &s
   glBindVertexArray(0);
 }
 
-glm::mat4 Renderer::generate_model_matrix(const glm::vec2 &position, const glm::vec2 &size, const float rotate)
+void Renderer::render_textured_object(const Texture2D& texture, const glm::vec2& position,
+                                      const glm::vec2& size, const glm::vec3& color, const float rotate)
+{
+  // Enable texture attribute
+  glBindVertexArray(vao_);
+  glEnableVertexAttribArray(1);
+  
+  // Create model matrix
+  const glm::mat4 model = generate_model_matrix(position, size, rotate);
+
+  // Set up the shader
+  ResourceManager::get_shader("texture").use();
+  ResourceManager::get_shader("texture").set_matrix4("model", model);
+  ResourceManager::get_shader("texture").set_vector3f("spriteColor", color);
+
+  // Set texture
+  glActiveTexture(GL_TEXTURE0);
+  texture.bind();
+
+  // Render
+  glDrawArrays(GL_TRIANGLES, 0, 6);
+  glBindVertexArray(0);
+}
+
+glm::mat4 Renderer::generate_model_matrix(const glm::vec2& position, const glm::vec2& size, const float rotate)
 {
   glm::mat4 model = glm::mat4(1.0f);
   model = glm::translate(model, glm::vec3(position, 0.0f));

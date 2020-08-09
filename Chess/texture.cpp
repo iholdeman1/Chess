@@ -30,7 +30,7 @@ void Texture2D::generate(unsigned char *data)
   glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void Texture2D::bind()
+void Texture2D::bind() const
 {
   glBindTexture(GL_TEXTURE_2D, id_);
 }

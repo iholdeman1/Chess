@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		91A51A6524E081ED000E65D6 /* piece_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91A51A6324E081ED000E65D6 /* piece_manager.cpp */; };
 		91E80C3424D5CFAE003AEFE2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E80C3324D5CFAE003AEFE2 /* main.cpp */; };
 		91E80C3C24D5CFDB003AEFE2 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E80C3B24D5CFDB003AEFE2 /* OpenGL.framework */; };
 		91E80C3F24D5D042003AEFE2 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E80C3E24D5D042003AEFE2 /* libglfw.3.3.dylib */; };
@@ -43,6 +44,29 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		91A51A6324E081ED000E65D6 /* piece_manager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = piece_manager.cpp; sourceTree = "<group>"; };
+		91A51A6424E081ED000E65D6 /* piece_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = piece_manager.hpp; sourceTree = "<group>"; };
+		91A51A6724E081F7000E65D6 /* piece.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = piece.hpp; sourceTree = "<group>"; };
+		91A51A6924E0824F000E65D6 /* king.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = king.hpp; sourceTree = "<group>"; };
+		91A51A6A24E0825C000E65D6 /* queen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = queen.hpp; sourceTree = "<group>"; };
+		91A51A6B24E08267000E65D6 /* knight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = knight.hpp; sourceTree = "<group>"; };
+		91A51A6C24E08276000E65D6 /* rook.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = rook.hpp; sourceTree = "<group>"; };
+		91A51A6D24E08289000E65D6 /* bishop.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = bishop.hpp; sourceTree = "<group>"; };
+		91A51A6E24E0829A000E65D6 /* pawn.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = pawn.hpp; sourceTree = "<group>"; };
+		91A51A6F24E08BFC000E65D6 /* white_bishop_100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white_bishop_100.png; sourceTree = "<group>"; };
+		91A51A7024E08BFC000E65D6 /* white_knight_100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white_knight_100.png; sourceTree = "<group>"; };
+		91A51A7124E08BFC000E65D6 /* white_king_100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white_king_100.png; sourceTree = "<group>"; };
+		91A51A7224E08BFC000E65D6 /* white_queen_100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white_queen_100.png; sourceTree = "<group>"; };
+		91A51A7324E08BFC000E65D6 /* black_knight_100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_knight_100.png; sourceTree = "<group>"; };
+		91A51A7424E08BFC000E65D6 /* black_queen_100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_queen_100.png; sourceTree = "<group>"; };
+		91A51A7524E08BFC000E65D6 /* black_rook_100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_rook_100.png; sourceTree = "<group>"; };
+		91A51A7624E08BFC000E65D6 /* white_rook_100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white_rook_100.png; sourceTree = "<group>"; };
+		91A51A7724E08BFC000E65D6 /* black_bishop_100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_bishop_100.png; sourceTree = "<group>"; };
+		91A51A7824E08BFC000E65D6 /* black_king_100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_king_100.png; sourceTree = "<group>"; };
+		91A51A7924E08BFC000E65D6 /* black_pawn_100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_pawn_100.png; sourceTree = "<group>"; };
+		91A51A7A24E08BFC000E65D6 /* white_pawn_100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white_pawn_100.png; sourceTree = "<group>"; };
+		91A51A7B24E09DA6000E65D6 /* texture.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.frag; sourceTree = "<group>"; };
+		91A51A7C24E09DA6000E65D6 /* texture.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = texture.vert; sourceTree = "<group>"; };
 		91E80C3024D5CFAE003AEFE2 /* Chess */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Chess; sourceTree = BUILT_PRODUCTS_DIR; };
 		91E80C3324D5CFAE003AEFE2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		91E80C3B24D5CFDB003AEFE2 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -113,6 +137,15 @@
 				91E80C5624D79D6D003AEFE2 /* shader.hpp */,
 				91E80C5824D79D7D003AEFE2 /* texture.cpp */,
 				91E80C5924D79D7D003AEFE2 /* texture.hpp */,
+				91A51A6324E081ED000E65D6 /* piece_manager.cpp */,
+				91A51A6424E081ED000E65D6 /* piece_manager.hpp */,
+				91A51A6724E081F7000E65D6 /* piece.hpp */,
+				91A51A6924E0824F000E65D6 /* king.hpp */,
+				91A51A6A24E0825C000E65D6 /* queen.hpp */,
+				91A51A6B24E08267000E65D6 /* knight.hpp */,
+				91A51A6C24E08276000E65D6 /* rook.hpp */,
+				91A51A6D24E08289000E65D6 /* bishop.hpp */,
+				91A51A6E24E0829A000E65D6 /* pawn.hpp */,
 			);
 			path = Chess;
 			sourceTree = "<group>";
@@ -129,6 +162,8 @@
 		91E80C4224D617C5003AEFE2 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				91A51A7B24E09DA6000E65D6 /* texture.frag */,
+				91A51A7C24E09DA6000E65D6 /* texture.vert */,
 				91E80C5D24D7A9EB003AEFE2 /* board.frag */,
 				91E80C5E24D7A9EC003AEFE2 /* board.vert */,
 			);
@@ -138,6 +173,18 @@
 		91E80C4324D617D9003AEFE2 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				91A51A7724E08BFC000E65D6 /* black_bishop_100.png */,
+				91A51A7824E08BFC000E65D6 /* black_king_100.png */,
+				91A51A7324E08BFC000E65D6 /* black_knight_100.png */,
+				91A51A7924E08BFC000E65D6 /* black_pawn_100.png */,
+				91A51A7424E08BFC000E65D6 /* black_queen_100.png */,
+				91A51A7524E08BFC000E65D6 /* black_rook_100.png */,
+				91A51A6F24E08BFC000E65D6 /* white_bishop_100.png */,
+				91A51A7124E08BFC000E65D6 /* white_king_100.png */,
+				91A51A7024E08BFC000E65D6 /* white_knight_100.png */,
+				91A51A7A24E08BFC000E65D6 /* white_pawn_100.png */,
+				91A51A7224E08BFC000E65D6 /* white_queen_100.png */,
+				91A51A7624E08BFC000E65D6 /* white_rook_100.png */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -202,6 +249,7 @@
 			files = (
 				91E80C5724D79D6D003AEFE2 /* shader.cpp in Sources */,
 				91E80C4B24D78848003AEFE2 /* renderer.cpp in Sources */,
+				91A51A6524E081ED000E65D6 /* piece_manager.cpp in Sources */,
 				91E80C3424D5CFAE003AEFE2 /* main.cpp in Sources */,
 				91E80C5424D79C05003AEFE2 /* resource_manager.cpp in Sources */,
 				91E80C5A24D79D7D003AEFE2 /* texture.cpp in Sources */,
