@@ -8,7 +8,19 @@
 
 #include "game.hpp"
 
+#include <iostream>
+
 Game::Game(const uint32_t width, const uint32_t height) : width_(width), height_(height)
+{
+}
+
+Game::~Game()
+{
+  delete board_;
+  delete renderer_;
+}
+
+void Game::init()
 {
   // Create the projection matrix
   const glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(width_),
@@ -62,12 +74,6 @@ Game::Game(const uint32_t width, const uint32_t height) : width_(width), height_
   renderer_ = new Renderer();
 }
 
-Game::~Game()
-{
-  delete board_;
-  delete renderer_;
-}
-
 void Game::process_input(const float delta_time)
 {
   
@@ -82,4 +88,28 @@ void Game::render()
 {
   board_->render(renderer_);
   piece_manager_->render(renderer_);
+}
+
+void Game::handle_mouse_down()
+{
+  if (!mouse_down_)
+  {
+    mouse_down_ = true;
+  }
+}
+
+void Game::handle_mouse_up(const double x, const double y)
+{
+  if (mouse_down_)
+  {
+    const int new_x = x/100;
+    const int new_y = y/100;
+    
+    if (board_->is_piece_at_square(new_x, new_y))
+    {
+      const int8_t piece_id = board_->get_piece_at_square(new_x, new_y);
+    }
+    
+    mouse_down_ = false;
+  }
 }

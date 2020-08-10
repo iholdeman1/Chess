@@ -23,6 +23,10 @@ const uint32_t SCREEN_HEIGHT = 800;
 // Callbacks
 void frame_buffer_size_callback(GLFWwindow *window, const int width, const int height);
 void key_callback(GLFWwindow *window, const int key, const int scancode, const int action, const int mods);
+void mouse_callback(GLFWwindow *window, const int button, const int action, const int mods);
+
+// Make the game
+Game chess(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 // Kill function
 void kill_glfw()
@@ -33,7 +37,8 @@ void kill_glfw()
 int main()
 {
   // Initialize GLFW
-  if (!glfwInit()) {
+  if (!glfwInit())
+  {
     std::cerr << "GLFW failed to initialize! Quitting program...\n";
     return -1;
   }
@@ -47,7 +52,8 @@ int main()
   
   GLFWwindow *window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Chess", nullptr, nullptr);
   
-  if (window == nullptr) {
+  if (window == nullptr)
+  {
     std::cerr << "Failed to create GLFW window\n";
     kill_glfw();
     return -1;
@@ -58,6 +64,7 @@ int main()
   // Set Callbacks
   glfwSetKeyCallback(window, key_callback);
   glfwSetFramebufferSizeCallback(window, frame_buffer_size_callback);
+  glfwSetMouseButtonCallback(window, mouse_callback);
 
   // Set the viewport (handles retina display)
   int width, height;
@@ -67,13 +74,13 @@ int main()
   // Enable stuff
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  
+  // Initialize the game
+  chess.init();
 
   // Time variables
   float delta_time = 0.0;
   float last_frame = 0.0;
-  
-  // Make the game
-  Game chess(SCREEN_WIDTH, SCREEN_HEIGHT);
   
   // Game loop
   while (!glfwWindowShouldClose(window))
@@ -116,5 +123,31 @@ void key_callback(GLFWwindow *window, const int key, const int scancode,
                   const int action, const int mods)
 {
   if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-      glfwSetWindowShouldClose(window, true);
+  {
+    glfwSetWindowShouldClose(window, true);
+  }
+}
+
+// Callback to handle mouse input
+void mouse_callback(GLFWwindow *window, const int button, const int action, const int mods)
+{
+  if (button == GLFW_MOUSE_BUTTON_LEFT)
+  {
+    switch (action)
+    {
+      case GLFW_PRESS:
+        chess.handle_mouse_down();
+        break;
+      case GLFW_RELEASE:
+        double x, y;
+        glfwGetCursorPos(window, &x, &y);
+        if (x != NULL && y != NULL)
+        {
+          chess.handle_mouse_up(x, y);
+        }
+        break;
+      default:
+        break;
+    }
+  }
 }
