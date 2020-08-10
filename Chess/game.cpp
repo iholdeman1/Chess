@@ -8,8 +8,6 @@
 
 #include "game.hpp"
 
-#include <iostream>
-
 Game::Game(const uint32_t width, const uint32_t height) : width_(width), height_(height)
 {
 }
@@ -18,6 +16,7 @@ Game::~Game()
 {
   delete board_;
   delete renderer_;
+  delete piece_manager_;
 }
 
 void Game::init()
