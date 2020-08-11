@@ -10,7 +10,7 @@
 
 Board::Board(const uint32_t width, const uint32_t height) : width_(width), height_(height)
 {
-  board_ = std::vector<std::vector<int8_t>>(8, std::vector<int8_t>(8, 0));
+  board_ = std::vector<std::vector<int8_t>>(8, std::vector<int8_t>(8, -1));
   square_size_ = width_ / 8;
   
   // Initialized board with expected piece ids
@@ -23,10 +23,6 @@ Board::Board(const uint32_t width, const uint32_t height) : width_(width), heigh
       {
         board_[i][j] = id_count;
         id_count++;
-      }
-      else
-      {
-        board_[i][j] = -1;
       }
     }
   }
