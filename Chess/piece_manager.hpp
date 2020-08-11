@@ -36,6 +36,9 @@ public:
   
   void render(Renderer *renderer);
   
+  const std::vector<std::pair<uint8_t, uint8_t>> get_pieces_moves(const uint8_t id,
+                                                                  const std::vector<std::vector<int8_t>>& board) const;
+  
 private:
   std::vector<Piece*> pieces_;
 };

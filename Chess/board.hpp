@@ -10,7 +10,9 @@
 #define board_hpp
 
 // System Includes
+#include <map>
 #include <stdint.h>
+#include <vector>
 
 // Local Includes
 #include "renderer.hpp"
@@ -22,15 +24,18 @@ public:
   
   void render(Renderer *renderer);
 
+  const std::vector<std::vector<int8_t>>& get_current_board() const;
   bool is_piece_at_square(const uint8_t x, const uint8_t y) const;
   int8_t get_piece_at_square(const uint8_t x, const uint8_t y) const;
+  void accept_valid_moves(const std::vector<std::pair<uint8_t, uint8_t>> moves);
   
 private:
   uint32_t width_;
   uint32_t height_;
   uint32_t square_size_;
   
-  int8_t board_[8][8];
+  std::vector<std::vector<int8_t>> board_;
+  std::map<std::pair<uint8_t, uint8_t>, bool> moves_;
 };
 
 #endif /* board_hpp */

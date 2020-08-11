@@ -20,6 +20,29 @@ public:
   : Piece(std::move(position), std::move(size), std::move(game_color), std::move(texture), std::move(color))
   {
   }
+  
+  std::vector<std::pair<uint8_t, uint8_t>> calculate_possible_moves(const std::vector<std::vector<int8_t>>& board)
+  {
+    std::vector<std::pair<uint8_t, uint8_t>> temp;
+    const uint8_t x = position_.x / 100;
+    const uint8_t y = position_.y / 100;
+    
+    // Note: this is for WHITE PIECES ONLY! Will update when I implement players
+    if (!has_moved_ && board[y-1][x] == -1 && board[y-2][x] == -1)
+    {
+      temp.push_back(std::pair<uint8_t, uint8_t>{y-2, x});
+    }
+    
+    if (board[y-1][x] == -1)
+    {
+      temp.push_back(std::pair<uint8_t, uint8_t>{y-1, x});
+    }
+    
+    return temp;
+  }
+  
+private:
+  bool has_moved_ = false;
 };
 
 #endif /* pawn_h */

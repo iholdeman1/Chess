@@ -107,6 +107,8 @@ void Game::handle_mouse_up(const double x, const double y)
     if (board_->is_piece_at_square(new_x, new_y))
     {
       const int8_t piece_id = board_->get_piece_at_square(new_x, new_y);
+      const auto moves = piece_manager_->get_pieces_moves(piece_id, board_->get_current_board());
+      board_->accept_valid_moves(std::move(moves));
     }
     
     mouse_down_ = false;
