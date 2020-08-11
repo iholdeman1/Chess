@@ -10,6 +10,7 @@
 
 Board::Board(const uint32_t width, const uint32_t height) : width_(width), height_(height)
 {
+  board_ = std::vector<std::vector<int8_t>>(8, std::vector<int8_t>(8, 0));
   square_size_ = width_ / 8;
   
   // Initialized board with expected piece ids
@@ -38,11 +39,27 @@ void Board::render(Renderer *renderer)
   {
     for (uint8_t j = 0; j < 8; j++)
     {
-      const glm::vec3 color = (i + j) % 2 == 0 ? glm::vec3(0.9f, 0.9f, 0.9f) : glm::vec3(0.4f, 0.4f, 0.4f);
       const glm::vec2 position(j * square_size_, i * square_size_);
+      
+      glm::vec3 color;
+      auto search = moves_.find(std::pair<uint8_t, uint8_t>{i, j});
+      if (search != moves_.end())
+      {
+        color = glm::vec3(0.0f, 0.8f, 0.8f);
+      }
+      else
+      {
+        color = (i + j) % 2 == 0 ? glm::vec3(0.9f, 0.9f, 0.9f) : glm::vec3(0.4f, 0.4f, 0.4f);
+      }
+      
       renderer->render_basic_object(position, size, color, 0.0f);
     }
   }
+}
+
+const std::vector<std::vector<int8_t>>& Board::get_current_board() const
+{
+  return board_;
 }
 
 bool Board::is_piece_at_square(const uint8_t x, const uint8_t y) const
@@ -53,4 +70,14 @@ bool Board::is_piece_at_square(const uint8_t x, const uint8_t y) const
 int8_t Board::get_piece_at_square(const uint8_t x, const uint8_t y) const
 {
   return board_[y][x];
+}
+
+void Board::accept_valid_moves(const std::vector<std::pair<uint8_t, uint8_t>> moves)
+{
+  moves_.clear();
+  
+  for (const std::pair<uint8_t, uint8_t>& pair : moves)
+  {
+    moves_[pair] = true;
+  }
 }

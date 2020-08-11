@@ -20,6 +20,63 @@ public:
   : Piece(std::move(position), std::move(size), std::move(game_color), std::move(texture), std::move(color))
   {
   }
+  
+  std::vector<std::pair<uint8_t, uint8_t>> calculate_possible_moves(const std::vector<std::vector<int8_t>>& board)
+  {
+    std::vector<std::pair<uint8_t, uint8_t>> temp;
+    const uint8_t x = position_.x / 100;
+    const uint8_t y = position_.y / 100;
+    
+    // Up-left
+    if (y-2 >= 0 && x-1 >= 0)
+    {
+      temp.push_back(std::pair<uint8_t, uint8_t>{y-2, x-1});
+    }
+      
+    // Up-right
+    if (y-2 >= 0 && x+1 <= 7)
+    {
+      temp.push_back(std::pair<uint8_t, uint8_t>{y-2, x+1});
+    }
+    
+    // Right-up
+    if (y-1 >= 0 && x+2 <= 7)
+    {
+      temp.push_back(std::pair<uint8_t, uint8_t>{y-1, x+2});
+    }
+    
+    // Right-down
+    if (y+1 >= 0 && x+2 <= 7)
+    {
+      temp.push_back(std::pair<uint8_t, uint8_t>{y+1, x+2});
+    }
+    
+    // Down-right
+    if (y+2 <= 7 && x+1 <= 7)
+    {
+      temp.push_back(std::pair<uint8_t, uint8_t>{y+2, x+1});
+    }
+    
+    // Down-left
+    if (y+2 <= 7 && x-1 >= 0)
+    {
+      temp.push_back(std::pair<uint8_t, uint8_t>{y+2, x-1});
+    }
+    
+    // Left-down
+    if (y+1 <= 7 && x-2 >= 0)
+    {
+      temp.push_back(std::pair<uint8_t, uint8_t>{y+1, x-2});
+    }
+    
+    // Left-up
+    if (y-1 >= 0 && x-2 >= 0)
+    {
+      temp.push_back(std::pair<uint8_t, uint8_t>{y-1, x-2});
+    }
+    
+    return temp;
+  }
 };
 
 #endif /* knight_h */

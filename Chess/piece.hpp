@@ -14,6 +14,10 @@
 #include "gtc/matrix_transform.hpp"
 #include "gtc/type_ptr.hpp"
 
+// System Includes
+#include <utility>
+#include <vector>
+
 // Local Includes
 #include "renderer.hpp"
 #include "texture.hpp"
@@ -37,6 +41,8 @@ public:
   {
     renderer->render_textured_object(texture_, position_, size_, color_, 0.0f);
   }
+  
+  virtual std::vector<std::pair<uint8_t, uint8_t>> calculate_possible_moves(const std::vector<std::vector<int8_t>>& board) = 0;
 
 protected:
   glm::vec2 position_;
