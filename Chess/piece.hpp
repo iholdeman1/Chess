@@ -15,6 +15,7 @@
 #include "gtc/type_ptr.hpp"
 
 // System Includes
+#include <iostream>
 #include <utility>
 #include <vector>
 
@@ -56,12 +57,22 @@ public:
     renderer->render_textured_object(texture_, position_, size_, color_, 0.0f);
   }
   
+  glm::vec2 get_position() const
+  {
+    return position_;
+  }
+  
+  void update_position(const glm::vec2& position)
+  {
+    position_ = position;
+  }
+  
   PairsList calcules_moves_in_a_direction(PairsList moves, Direction dir, const int x,
                                           const int y, const std::vector<std::vector<int8_t>>& board)
   {
     uint8_t count = 1;
     const uint8_t BOARD_MIN = 0;
-    const uint8_t BOARD_MAX = board.size();
+    const uint8_t BOARD_MAX = board.size()-1;
     
     switch (dir)
     {

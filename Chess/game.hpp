@@ -30,7 +30,7 @@ public:
   void update(const float delta_time);
   void render();
   
-  void handle_mouse_down();
+  void handle_mouse_down(const double x, const double y);
   void handle_mouse_up(const double x, const double y);
 
 private:
@@ -40,6 +40,7 @@ private:
   PieceManager *piece_manager_ = nullptr;
   
   bool mouse_down_ = false;
+  uint8_t selected_piece_ = -1;
   glm::vec2 mouse_position_ = glm::vec2(1.0f);
 };
 

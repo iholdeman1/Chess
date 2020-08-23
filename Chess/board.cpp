@@ -37,18 +37,15 @@ void Board::render(Renderer *renderer)
     {
       const glm::vec2 position(j * square_size_, i * square_size_);
       
-      glm::vec3 color;
-      auto search = moves_.find(std::pair<uint8_t, uint8_t>{i, j});
-      if (search != moves_.end() && !is_piece_at_square(j, i))
-      {
-        color = glm::vec3(0.0f, 0.8f, 0.8f);
-      }
-      else
-      {
-        color = (i + j) % 2 == 0 ? glm::vec3(0.9f, 0.9f, 0.9f) : glm::vec3(0.4f, 0.4f, 0.4f);
-      }
-      
+      glm::vec4 color;
+      color = (i + j) % 2 == 0 ? glm::vec4(0.9f, 0.9f, 0.9f, 1.0) : glm::vec4(0.4f, 0.4f, 0.4f, 1.0);
       renderer->render_basic_object(position, size, color, 0.0f);
+      
+      if (is_valid_move(i, j))
+      {
+        color = glm::vec4(0.0f, 0.8f, 0.8f, 0.4);
+        renderer->render_basic_object(position, size, color, 0.0f);
+      }
     }
   }
 }
@@ -68,12 +65,30 @@ int8_t Board::get_piece_at_square(const uint8_t x, const uint8_t y) const
   return board_[y][x];
 }
 
+bool Board::is_valid_move(const uint8_t x, const uint8_t y) const
+{
+  auto search = moves_.find(std::pair<uint8_t, uint8_t>{x, y});
+  return search != moves_.end() && !is_piece_at_square(y, x);
+}
+
 void Board::accept_valid_moves(const std::vector<std::pair<uint8_t, uint8_t>> moves)
 {
-  moves_.clear();
+  clear_moves();
   
   for (const std::pair<uint8_t, uint8_t>& pair : moves)
   {
     moves_[pair] = true;
   }
+}
+
+void Board::move_piece(const glm::vec2& old_position, const glm::vec2& new_position)
+{
+  board_[new_position.y][new_position.x] = board_[old_position.y][old_position.x];
+  board_[old_position.y][old_position.x] = -1;
+  clear_moves();
+}
+
+void Board::clear_moves()
+{
+  moves_.clear();
 }
