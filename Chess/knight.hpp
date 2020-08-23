@@ -23,59 +23,61 @@ public:
   
   std::vector<std::pair<uint8_t, uint8_t>> calculate_possible_moves(const std::vector<std::vector<int8_t>>& board)
   {
-    std::vector<std::pair<uint8_t, uint8_t>> temp;
+    std::vector<std::pair<uint8_t, uint8_t>> moves;
     const uint8_t x = position_.x / 100;
     const uint8_t y = position_.y / 100;
+    const uint8_t BOARD_MIN = 0;
+    const uint8_t BOARD_MAX = board.size();
     
     // Up-left
-    if (y-2 >= 0 && x-1 >= 0)
+    if (y-2 >= BOARD_MIN && x-1 >= BOARD_MIN && board[y-2][x-1] == -1)
     {
-      temp.push_back(std::pair<uint8_t, uint8_t>{y-2, x-1});
+      moves.push_back(std::pair<uint8_t, uint8_t>{y-2, x-1});
     }
       
     // Up-right
-    if (y-2 >= 0 && x+1 <= 7)
+    if (y-2 >= BOARD_MIN && x+1 <= BOARD_MAX && board[y-2][x+1] == -1)
     {
-      temp.push_back(std::pair<uint8_t, uint8_t>{y-2, x+1});
+      moves.push_back(std::pair<uint8_t, uint8_t>{y-2, x+1});
     }
     
     // Right-up
-    if (y-1 >= 0 && x+2 <= 7)
+    if (y-1 >= BOARD_MIN && x+2 <= BOARD_MAX && board[y-1][x+2] == -1)
     {
-      temp.push_back(std::pair<uint8_t, uint8_t>{y-1, x+2});
+      moves.push_back(std::pair<uint8_t, uint8_t>{y-1, x+2});
     }
     
     // Right-down
-    if (y+1 >= 0 && x+2 <= 7)
+    if (y+1 >= BOARD_MIN && x+2 <= BOARD_MAX && board[y+1][x+2] == -1)
     {
-      temp.push_back(std::pair<uint8_t, uint8_t>{y+1, x+2});
+      moves.push_back(std::pair<uint8_t, uint8_t>{y+1, x+2});
     }
     
     // Down-right
-    if (y+2 <= 7 && x+1 <= 7)
+    if (y+2 <= BOARD_MAX && x+1 <= BOARD_MAX && board[y+2][x+1] == -1)
     {
-      temp.push_back(std::pair<uint8_t, uint8_t>{y+2, x+1});
+      moves.push_back(std::pair<uint8_t, uint8_t>{y+2, x+1});
     }
     
     // Down-left
-    if (y+2 <= 7 && x-1 >= 0)
+    if (y+2 <= BOARD_MAX && x-1 >= BOARD_MIN && board[y+2][x-1] == -1)
     {
-      temp.push_back(std::pair<uint8_t, uint8_t>{y+2, x-1});
+      moves.push_back(std::pair<uint8_t, uint8_t>{y+2, x-1});
     }
     
     // Left-down
-    if (y+1 <= 7 && x-2 >= 0)
+    if (y+1 <= BOARD_MAX && x-2 >= BOARD_MIN && board[y+1][x-2] == -1)
     {
-      temp.push_back(std::pair<uint8_t, uint8_t>{y+1, x-2});
+      moves.push_back(std::pair<uint8_t, uint8_t>{y+1, x-2});
     }
     
     // Left-up
-    if (y-1 >= 0 && x-2 >= 0)
+    if (y-1 >= BOARD_MIN && x-2 >= BOARD_MIN && board[y-1][x-2] == -1)
     {
-      temp.push_back(std::pair<uint8_t, uint8_t>{y-1, x-2});
+      moves.push_back(std::pair<uint8_t, uint8_t>{y-1, x-2});
     }
     
-    return temp;
+    return moves;
   }
 };
 

@@ -67,6 +67,8 @@ void Game::init()
   
   // Create the board
   board_ = new Board(width_, height_);
+  
+  // Create the piece manager
   piece_manager_ = new PieceManager(width_ / 8);
   
   // Create the renderer

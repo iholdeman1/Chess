@@ -39,7 +39,7 @@ void Board::render(Renderer *renderer)
       
       glm::vec3 color;
       auto search = moves_.find(std::pair<uint8_t, uint8_t>{i, j});
-      if (search != moves_.end())
+      if (search != moves_.end() && !is_piece_at_square(j, i))
       {
         color = glm::vec3(0.0f, 0.8f, 0.8f);
       }
