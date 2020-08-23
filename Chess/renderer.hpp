@@ -26,7 +26,7 @@ public:
   ~Renderer();
   
   void render_basic_object(const glm::vec2& position, const glm::vec2& size,
-                           const glm::vec3& color, const float rotate);
+                           const glm::vec4& color, const float rotate);
   
   void render_textured_object(const Texture2D& texture, const glm::vec2& position,
                               const glm::vec2& size, const glm::vec3& color, const float rotate);

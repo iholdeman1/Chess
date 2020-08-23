@@ -50,7 +50,7 @@ Renderer::~Renderer()
 }
 
 void Renderer::render_basic_object(const glm::vec2& position, const glm::vec2& size,
-                                   const glm::vec3& color, const float rotate)
+                                   const glm::vec4& color, const float rotate)
 {
   // Disable texture attribute
   glBindVertexArray(vao_);
@@ -62,7 +62,7 @@ void Renderer::render_basic_object(const glm::vec2& position, const glm::vec2& s
   // Set up the shader
   ResourceManager::get_shader("board").use();
   ResourceManager::get_shader("board").set_matrix4("model", model);
-  ResourceManager::get_shader("board").set_vector3f("color", color);
+  ResourceManager::get_shader("board").set_vector4f("color", color);
   
   // Render
   glDrawArrays(GL_TRIANGLES, 0, 6);

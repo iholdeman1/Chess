@@ -27,7 +27,7 @@ public:
     const uint8_t x = position_.x / 100;
     const uint8_t y = position_.y / 100;
     const uint8_t BOARD_MIN = 0;
-    const uint8_t BOARD_MAX = board.size();
+    const uint8_t BOARD_MAX = board.size()-1;
     
     // Up-left
     if (y-2 >= BOARD_MIN && x-1 >= BOARD_MIN && board[y-2][x-1] == -1)

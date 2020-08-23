@@ -87,3 +87,13 @@ const
 {
   return pieces_[id]->calculate_possible_moves(board);
 }
+
+glm::vec2 PieceManager::get_piece_position(const uint8_t id) const
+{
+  return pieces_[id]->get_position();
+}
+
+void PieceManager::move_piece(const uint8_t id, const glm::vec2 &position)
+{
+  pieces_[id]->update_position(position);
+}

@@ -103,13 +103,20 @@ void Game::handle_mouse_up(const double x, const double y)
 {
   if (mouse_down_)
   {
-    const int new_x = x/100;
-    const int new_y = y/100;
+    const uint8_t new_x = x/100;
+    const uint8_t new_y = y/100;
     
-    if (board_->is_piece_at_square(new_x, new_y))
+    if (selected_piece_ != -1 && board_->is_valid_move(new_y, new_x))
     {
-      const int8_t piece_id = board_->get_piece_at_square(new_x, new_y);
-      const auto moves = piece_manager_->get_pieces_moves(piece_id, board_->get_current_board());
+      const glm::vec2 old_position = piece_manager_->get_piece_position(selected_piece_);
+      board_->move_piece(glm::vec2(old_position.x/100, old_position.y/100), glm::vec2(new_x, new_y));
+      piece_manager_->move_piece(selected_piece_, glm::vec2(new_x*100, new_y*100));
+      selected_piece_ = -1;
+    }
+    else if (board_->is_piece_at_square(new_x, new_y))
+    {
+      selected_piece_ = board_->get_piece_at_square(new_x, new_y);
+      const auto moves = piece_manager_->get_pieces_moves(selected_piece_, board_->get_current_board());
       board_->accept_valid_moves(std::move(moves));
     }
     
