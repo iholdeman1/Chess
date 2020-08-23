@@ -28,7 +28,7 @@ public:
     const uint8_t y = position_.y / 100;
     
     moves = calcules_moves_in_a_direction(std::move(moves), Direction::UP, x, y, board);
-    moves = calcules_moves_in_a_direction(std::move(moves), Direction::UP_LEFT, x, y, board);
+    moves = calcules_moves_in_a_direction(std::move(moves), Direction::UP_RIGHT, x, y, board);
     moves = calcules_moves_in_a_direction(std::move(moves), Direction::RIGHT, x, y, board);
     moves = calcules_moves_in_a_direction(std::move(moves), Direction::DOWN_RIGHT, x, y, board);
     moves = calcules_moves_in_a_direction(std::move(moves), Direction::DOWN, x, y, board);

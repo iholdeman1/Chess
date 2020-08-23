@@ -30,49 +30,49 @@ public:
     const uint8_t BOARD_MAX = board.size();
     
     // Up-left
-    if (y-1 >= BOARD_MIN && x-1 >= BOARD_MIN)
+    if (y-1 >= BOARD_MIN && x-1 >= BOARD_MIN && board[y-1][x-1] == -1)
     {
       moves.push_back(std::pair<uint8_t, uint8_t>{y-1, x-1});
     }
       
     // Up
-    if (y-1 >= BOARD_MIN)
+    if (y-1 >= BOARD_MIN && board[y-1][x] == -1)
     {
       moves.push_back(std::pair<uint8_t, uint8_t>{y-1, x});
     }
     
     // Up-right
-    if (y-1 >= BOARD_MIN && x+1 <= BOARD_MAX)
+    if (y-1 >= BOARD_MIN && x+1 <= BOARD_MAX && board[y-1][x+1] == -1)
     {
       moves.push_back(std::pair<uint8_t, uint8_t>{y-1, x+1});
     }
     
     // Right
-    if (x+1 <= BOARD_MAX)
+    if (x+1 <= BOARD_MAX && board[y][x+1] == -1)
     {
       moves.push_back(std::pair<uint8_t, uint8_t>{y, x+1});
     }
     
     // Down-right
-    if (y+1 <= BOARD_MAX && x+1 <= BOARD_MAX)
+    if (y+1 <= BOARD_MAX && x+1 <= BOARD_MAX && board[y+1][x+1] == -1)
     {
       moves.push_back(std::pair<uint8_t, uint8_t>{y+1, x+1});
     }
     
     // Down
-    if (y+1 <= BOARD_MAX)
+    if (y+1 <= BOARD_MAX && board[y+1][x] == -1)
     {
       moves.push_back(std::pair<uint8_t, uint8_t>{y+1, x});
     }
     
     // Down-left
-    if (y+1 <= BOARD_MAX && x-1 >= BOARD_MIN)
+    if (y+1 <= BOARD_MAX && x-1 >= BOARD_MIN && board[y+1][x-1] == -1)
     {
       moves.push_back(std::pair<uint8_t, uint8_t>{y+1, x-1});
     }
     
     // Left
-    if (x-1 >= BOARD_MIN)
+    if (x-1 >= BOARD_MIN && board[y][x-1] == -1)
     {
       moves.push_back(std::pair<uint8_t, uint8_t>{y, x-1});
     }
