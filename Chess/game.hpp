@@ -30,7 +30,7 @@ public:
   void update(const float delta_time);
   void render();
   
-  void handle_mouse_down(const double x, const double y);
+  void handle_mouse_down();
   void handle_mouse_up(const double x, const double y);
 
 private:

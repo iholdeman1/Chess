@@ -91,7 +91,7 @@ void Game::render()
   piece_manager_->render(renderer_);
 }
 
-void Game::handle_mouse_down(const double x, const double y)
+void Game::handle_mouse_down()
 {
   if (!mouse_down_)
   {

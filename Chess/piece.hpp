@@ -15,7 +15,6 @@
 #include "gtc/type_ptr.hpp"
 
 // System Includes
-#include <iostream>
 #include <utility>
 #include <vector>
 

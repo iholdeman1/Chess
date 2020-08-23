@@ -133,17 +133,14 @@ void mouse_callback(GLFWwindow *window, const int button, const int action, cons
 {
   if (button == GLFW_MOUSE_BUTTON_LEFT)
   {
-    double x, y;
-    glfwGetCursorPos(window, &x, &y);
     switch (action)
     {
       case GLFW_PRESS:
-        if (x != NULL && y != NULL)
-        {
-          chess.handle_mouse_down(x, y);
-        }
+        chess.handle_mouse_down();
         break;
       case GLFW_RELEASE:
+        double x, y;
+        glfwGetCursorPos(window, &x, &y);
         if (x != NULL && y != NULL)
         {
           chess.handle_mouse_up(x, y);
