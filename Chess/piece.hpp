@@ -28,6 +28,20 @@ enum class Color
   BLACK = 1
 };
 
+enum class Direction
+{
+  UP = 0,
+  UP_RIGHT = 1,
+  RIGHT = 2,
+  DOWN_RIGHT = 3,
+  DOWN = 4,
+  DOWN_LEFT = 5,
+  LEFT = 6,
+  UP_LEFT = 7
+};
+
+using PairsList = std::vector<std::pair<uint8_t, uint8_t>>;
+
 class Piece
 {
 public:
@@ -42,7 +56,127 @@ public:
     renderer->render_textured_object(texture_, position_, size_, color_, 0.0f);
   }
   
-  virtual std::vector<std::pair<uint8_t, uint8_t>> calculate_possible_moves(const std::vector<std::vector<int8_t>>& board) = 0;
+  PairsList calcules_moves_in_a_direction(PairsList moves, Direction dir, const int x,
+                                          const int y, const std::vector<std::vector<int8_t>>& board)
+  {
+    uint8_t count = 1;
+    const uint8_t BOARD_MIN = 0;
+    const uint8_t BOARD_MAX = board.size();
+    
+    switch (dir)
+    {
+      case Direction::UP:
+      {
+        while (y-count >= BOARD_MIN)
+        {
+          moves.push_back(std::pair<uint8_t, uint8_t>{y-count, x});
+          if (board[y-count][x] != -1)
+          {
+            break;
+          }
+          count++;
+        }
+        break;
+      }
+      case Direction::UP_RIGHT:
+      {
+        while (y-count >= BOARD_MIN || x+count <= BOARD_MAX)
+        {
+          moves.push_back(std::pair<uint8_t, uint8_t>{y-count, x+count});
+          if (board[y-count][x+count] != -1)
+          {
+            break;
+          }
+          count++;
+        }
+        break;
+      }
+      case Direction::RIGHT:
+      {
+        while (x+count <= BOARD_MAX)
+        {
+          moves.push_back(std::pair<uint8_t, uint8_t>{y, x+count});
+          if (board[y][x+count] != -1)
+          {
+            break;
+          }
+          count++;
+        }
+        break;
+      }
+      case Direction::DOWN_RIGHT:
+      {
+        while (y+count <= BOARD_MAX || x+count <= BOARD_MAX)
+        {
+          moves.push_back(std::pair<uint8_t, uint8_t>{y+count, x+count});
+          if (board[y+count][x+count] != -1)
+          {
+            break;
+          }
+          count++;
+        }
+        break;
+      }
+      case Direction::DOWN:
+      {
+        while (y+count <= BOARD_MAX)
+        {
+          moves.push_back(std::pair<uint8_t, uint8_t>{y+count, x});
+          if (board[y+count][x] != -1)
+          {
+            break;
+          }
+          count++;
+        }
+        break;
+      }
+      case Direction::DOWN_LEFT:
+      {
+        while (y+count >= BOARD_MIN || x-count >= BOARD_MAX)
+        {
+          moves.push_back(std::pair<uint8_t, uint8_t>{y+count, x-count});
+          if (board[y+count][x-count] != -1)
+          {
+            break;
+          }
+          count++;
+        }
+        break;
+      }
+      case Direction::LEFT:
+      {
+        while (x-count >= BOARD_MIN)
+        {
+          moves.push_back(std::pair<uint8_t, uint8_t>{y, x-count});
+          if (board[y][x-count] != -1)
+          {
+            break;
+          }
+          count++;
+        }
+        break;
+      }
+      case Direction::UP_LEFT:
+      {
+        while (y-count >= BOARD_MIN || x-count >= BOARD_MIN)
+        {
+          moves.push_back(std::pair<uint8_t, uint8_t>{y-count, x-count});
+          if (board[y-count][x-count] != -1)
+          {
+            break;
+          }
+          count++;
+        }
+        break;
+      }
+      default:
+        break;
+    }
+    
+    return moves;
+  }
+  
+  virtual PairsList calculate_possible_moves(const std::vector<std::vector<int8_t>>& board) = 0;
 
 protected:
   glm::vec2 position_;

@@ -23,60 +23,16 @@ public:
   
   std::vector<std::pair<uint8_t, uint8_t>> calculate_possible_moves(const std::vector<std::vector<int8_t>>& board)
   {
-    std::vector<std::pair<uint8_t, uint8_t>> temp;
+    std::vector<std::pair<uint8_t, uint8_t>> moves;
     const uint8_t x = position_.x / 100;
     const uint8_t y = position_.y / 100;
-    uint8_t count = 1;
     
-    // Up
-    while (true)
-    {
-      if (y-count < 0)
-      {
-        count = 1;
-        break;
-      }
-      temp.push_back(std::pair<uint8_t, uint8_t>{y-count, x});
-      count++;
-    }
+    moves = calcules_moves_in_a_direction(std::move(moves), Direction::UP, x, y, board);
+    moves = calcules_moves_in_a_direction(std::move(moves), Direction::RIGHT, x, y, board);
+    moves = calcules_moves_in_a_direction(std::move(moves), Direction::DOWN, x, y, board);
+    moves = calcules_moves_in_a_direction(std::move(moves), Direction::LEFT, x, y, board);
     
-    // Down
-    while (true)
-    {
-      if (y+count > 7)
-      {
-        count = 1;
-        break;
-      }
-      temp.push_back(std::pair<uint8_t, uint8_t>{y+count, x});
-      count++;
-    }
-    
-    // Right
-    while (true)
-    {
-      if (x+count > 7)
-      {
-        count = 1;
-        break;
-      }
-      temp.push_back(std::pair<uint8_t, uint8_t>{y, x+count});
-      count++;
-    }
-    
-    // Left
-    while (true)
-    {
-      if (x-count < 0)
-      {
-        count = 1;
-        break;
-      }
-      temp.push_back(std::pair<uint8_t, uint8_t>{y, x-count});
-      count++;
-    }
-    
-    return temp;
+    return moves;
   }
 };
 

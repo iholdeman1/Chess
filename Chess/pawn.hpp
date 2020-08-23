@@ -23,22 +23,21 @@ public:
   
   std::vector<std::pair<uint8_t, uint8_t>> calculate_possible_moves(const std::vector<std::vector<int8_t>>& board)
   {
-    std::vector<std::pair<uint8_t, uint8_t>> temp;
+    std::vector<std::pair<uint8_t, uint8_t>> moves;
     const uint8_t x = position_.x / 100;
     const uint8_t y = position_.y / 100;
+    const uint8_t distance = has_moved_ ? 1 : 2;
     
     // Note: this is for WHITE PIECES ONLY! Will update when I implement players
-    if (!has_moved_ && board[y-1][x] == -1 && board[y-2][x] == -1)
+    for (uint8_t i = 1; i <= distance; i++)
     {
-      temp.push_back(std::pair<uint8_t, uint8_t>{y-2, x});
+      if (board[y-i][x] == -1)
+      {
+        moves.push_back(std::pair<uint8_t, uint8_t>{y-i, x});
+      }
     }
     
-    if (board[y-1][x] == -1)
-    {
-      temp.push_back(std::pair<uint8_t, uint8_t>{y-1, x});
-    }
-    
-    return temp;
+    return moves;
   }
   
 private:
