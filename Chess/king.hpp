@@ -21,7 +21,7 @@ public:
   {
   }
   
-  std::vector<std::pair<uint8_t, uint8_t>> calculate_possible_moves(const std::vector<std::vector<int8_t>>& board)
+  std::vector<std::pair<uint8_t, uint8_t>> calculate_possible_moves(const std::vector<std::vector<int8_t>>& board, const uint8_t turn)
   {
     std::vector<std::pair<uint8_t, uint8_t>> moves;
     const uint8_t x = position_.x / 100;
@@ -30,49 +30,49 @@ public:
     const uint8_t BOARD_MAX = board.size()-1;
     
     // Up-left
-    if (y-1 >= BOARD_MIN && x-1 >= BOARD_MIN && board[y-1][x-1] == -1)
+    if (y-1 >= BOARD_MIN && x-1 >= BOARD_MIN && (board[y-1][x-1] == -1 || colors_are_different(board[y][x], board[y-1][x-1])))
     {
       moves.push_back(std::pair<uint8_t, uint8_t>{y-1, x-1});
     }
       
     // Up
-    if (y-1 >= BOARD_MIN && board[y-1][x] == -1)
+    if (y-1 >= BOARD_MIN && (board[y-1][x] == -1 || colors_are_different(board[y][x], board[y-1][x])))
     {
       moves.push_back(std::pair<uint8_t, uint8_t>{y-1, x});
     }
     
     // Up-right
-    if (y-1 >= BOARD_MIN && x+1 <= BOARD_MAX && board[y-1][x+1] == -1)
+    if (y-1 >= BOARD_MIN && x+1 <= BOARD_MAX && (board[y-1][x+1] == -1 || colors_are_different(board[y][x], board[y-1][x+1])))
     {
       moves.push_back(std::pair<uint8_t, uint8_t>{y-1, x+1});
     }
     
     // Right
-    if (x+1 <= BOARD_MAX && board[y][x+1] == -1)
+    if (x+1 <= BOARD_MAX && (board[y][x+1] == -1 || colors_are_different(board[y][x], board[y][x+1])))
     {
       moves.push_back(std::pair<uint8_t, uint8_t>{y, x+1});
     }
     
     // Down-right
-    if (y+1 <= BOARD_MAX && x+1 <= BOARD_MAX && board[y+1][x+1] == -1)
+    if (y+1 <= BOARD_MAX && x+1 <= BOARD_MAX && (board[y+1][x+1] == -1 || colors_are_different(board[y][x], board[y+1][x+1])))
     {
       moves.push_back(std::pair<uint8_t, uint8_t>{y+1, x+1});
     }
     
     // Down
-    if (y+1 <= BOARD_MAX && board[y+1][x] == -1)
+    if (y+1 <= BOARD_MAX && (board[y+1][x] == -1 || colors_are_different(board[y][x], board[y+1][x])))
     {
       moves.push_back(std::pair<uint8_t, uint8_t>{y+1, x});
     }
     
     // Down-left
-    if (y+1 <= BOARD_MAX && x-1 >= BOARD_MIN && board[y+1][x-1] == -1)
+    if (y+1 <= BOARD_MAX && x-1 >= BOARD_MIN && (board[y+1][x-1] == -1 || colors_are_different(board[y][x], board[y+1][x-1])))
     {
       moves.push_back(std::pair<uint8_t, uint8_t>{y+1, x-1});
     }
     
     // Left
-    if (x-1 >= BOARD_MIN && board[y][x-1] == -1)
+    if (x-1 >= BOARD_MIN && (board[y][x-1] == -1 || colors_are_different(board[y][x], board[y][x-1])))
     {
       moves.push_back(std::pair<uint8_t, uint8_t>{y, x-1});
     }

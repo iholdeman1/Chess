@@ -21,7 +21,7 @@ public:
   {
   }
   
-  std::vector<std::pair<uint8_t, uint8_t>> calculate_possible_moves(const std::vector<std::vector<int8_t>>& board)
+  std::vector<std::pair<uint8_t, uint8_t>> calculate_possible_moves(const std::vector<std::vector<int8_t>>& board, const uint8_t turn)
   {
     std::vector<std::pair<uint8_t, uint8_t>> moves;
     const uint8_t x = position_.x / 100;

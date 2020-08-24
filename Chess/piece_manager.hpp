@@ -37,9 +37,12 @@ public:
   void render(Renderer *renderer);
   
   const std::vector<std::pair<uint8_t, uint8_t>> get_pieces_moves(const uint8_t id,
-                                                                  const std::vector<std::vector<int8_t>>& board) const;
+                                                                  const std::vector<std::vector<int8_t>>& board,
+                                                                  const uint8_t turn) const;
   glm::vec2 get_piece_position(const uint8_t id) const;
+  Color get_piece_game_color(const uint8_t id) const;
   void move_piece(const uint8_t id, const glm::vec2& position);
+  void delete_piece(const uint8_t id);
   
 private:
   std::vector<Piece*> pieces_;

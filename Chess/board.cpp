@@ -68,7 +68,7 @@ int8_t Board::get_piece_at_square(const uint8_t x, const uint8_t y) const
 bool Board::is_valid_move(const uint8_t x, const uint8_t y) const
 {
   auto search = moves_.find(std::pair<uint8_t, uint8_t>{x, y});
-  return search != moves_.end() && !is_piece_at_square(y, x);
+  return search != moves_.end();
 }
 
 void Board::accept_valid_moves(const std::vector<std::pair<uint8_t, uint8_t>> moves)
