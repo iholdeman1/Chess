@@ -24,8 +24,8 @@
 
 enum class Color
 {
-  WHITE = 0,
-  BLACK = 1
+  BLACK = 0,
+  WHITE = 1
 };
 
 enum class Direction
@@ -61,9 +61,20 @@ public:
     return position_;
   }
   
+  Color get_game_piece_color() const
+  {
+    return game_color_;
+  }
+  
   void update_position(const glm::vec2& position)
   {
     position_ = position;
+    has_moved_ = true;
+  }
+  
+  bool colors_are_different(const uint8_t owner_id, const uint8_t target_id) const
+  {
+    return (owner_id <= 15) ^ (target_id <= 15);
   }
   
   PairsList calcules_moves_in_a_direction(PairsList moves, Direction dir, const int x,
@@ -79,9 +90,16 @@ public:
       {
         while (y-count >= BOARD_MIN)
         {
-          moves.push_back(std::pair<uint8_t, uint8_t>{y-count, x});
-          if (board[y-count][x] != -1)
+          if (board[y-count][x] == -1)
           {
+            moves.push_back(std::pair<uint8_t, uint8_t>{y-count, x});
+          }
+          else
+          {
+            if (colors_are_different(board[y][x], board[y-count][x]))
+            {
+              moves.push_back(std::pair<uint8_t, uint8_t>{y-count, x});
+            }
             break;
           }
           count++;
@@ -92,9 +110,16 @@ public:
       {
         while (y-count >= BOARD_MIN || x+count <= BOARD_MAX)
         {
-          moves.push_back(std::pair<uint8_t, uint8_t>{y-count, x+count});
-          if (board[y-count][x+count] != -1)
+          if (board[y-count][x+count] == -1)
           {
+            moves.push_back(std::pair<uint8_t, uint8_t>{y-count, x+count});
+          }
+          else
+          {
+            if (colors_are_different(board[y][x], board[y-count][x+count]))
+            {
+              moves.push_back(std::pair<uint8_t, uint8_t>{y-count, x+count});
+            }
             break;
           }
           count++;
@@ -105,9 +130,16 @@ public:
       {
         while (x+count <= BOARD_MAX)
         {
-          moves.push_back(std::pair<uint8_t, uint8_t>{y, x+count});
-          if (board[y][x+count] != -1)
+          if (board[y][x+count] == -1)
           {
+            moves.push_back(std::pair<uint8_t, uint8_t>{y, x+count});
+          }
+          else
+          {
+            if (colors_are_different(board[y][x], board[y][x+count]))
+            {
+              moves.push_back(std::pair<uint8_t, uint8_t>{y, x+count});
+            }
             break;
           }
           count++;
@@ -118,9 +150,16 @@ public:
       {
         while (y+count <= BOARD_MAX || x+count <= BOARD_MAX)
         {
-          moves.push_back(std::pair<uint8_t, uint8_t>{y+count, x+count});
-          if (board[y+count][x+count] != -1)
+          if (board[y+count][x+count] == -1)
           {
+            moves.push_back(std::pair<uint8_t, uint8_t>{y+count, x+count});
+          }
+          else
+          {
+            if (colors_are_different(board[y][x], board[y+count][x+count]))
+            {
+              moves.push_back(std::pair<uint8_t, uint8_t>{y+count, x+count});
+            }
             break;
           }
           count++;
@@ -131,9 +170,16 @@ public:
       {
         while (y+count <= BOARD_MAX)
         {
-          moves.push_back(std::pair<uint8_t, uint8_t>{y+count, x});
-          if (board[y+count][x] != -1)
+          if (board[y+count][x] == -1)
           {
+            moves.push_back(std::pair<uint8_t, uint8_t>{y+count, x});
+          }
+          else
+          {
+            if (colors_are_different(board[y][x], board[y+count][x]))
+            {
+              moves.push_back(std::pair<uint8_t, uint8_t>{y+count, x});
+            }
             break;
           }
           count++;
@@ -144,9 +190,16 @@ public:
       {
         while (y+count >= BOARD_MIN || x-count >= BOARD_MAX)
         {
-          moves.push_back(std::pair<uint8_t, uint8_t>{y+count, x-count});
-          if (board[y+count][x-count] != -1)
+          if (board[y+count][x-count] == -1)
           {
+            moves.push_back(std::pair<uint8_t, uint8_t>{y+count, x-count});
+          }
+          else
+          {
+            if (colors_are_different(board[y][x], board[y+count][x-count]))
+            {
+              moves.push_back(std::pair<uint8_t, uint8_t>{y+count, x-count});
+            }
             break;
           }
           count++;
@@ -157,9 +210,16 @@ public:
       {
         while (x-count >= BOARD_MIN)
         {
-          moves.push_back(std::pair<uint8_t, uint8_t>{y, x-count});
-          if (board[y][x-count] != -1)
+          if (board[y][x-count] == -1)
           {
+            moves.push_back(std::pair<uint8_t, uint8_t>{y, x-count});
+          }
+          else
+          {
+            if (colors_are_different(board[y][x], board[y][x-count]))
+            {
+              moves.push_back(std::pair<uint8_t, uint8_t>{y, x-count});
+            }
             break;
           }
           count++;
@@ -170,9 +230,16 @@ public:
       {
         while (y-count >= BOARD_MIN || x-count >= BOARD_MIN)
         {
-          moves.push_back(std::pair<uint8_t, uint8_t>{y-count, x-count});
-          if (board[y-count][x-count] != -1)
+          if (board[y-count][x-count] == -1)
           {
+            moves.push_back(std::pair<uint8_t, uint8_t>{y-count, x-count});
+          }
+          else
+          {
+            if (colors_are_different(board[y][x], board[y-count][x-count]))
+            {
+              moves.push_back(std::pair<uint8_t, uint8_t>{y-count, x-count});
+            }
             break;
           }
           count++;
@@ -186,7 +253,7 @@ public:
     return moves;
   }
   
-  virtual PairsList calculate_possible_moves(const std::vector<std::vector<int8_t>>& board) = 0;
+  virtual PairsList calculate_possible_moves(const std::vector<std::vector<int8_t>>& board, const uint8_t turn) = 0;
 
 protected:
   glm::vec2 position_;
@@ -194,6 +261,7 @@ protected:
   Color game_color_;
   Texture2D texture_;
   glm::vec3 color_;
+  bool has_moved_;
 };
 
 #endif /* piece_hpp */

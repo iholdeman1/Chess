@@ -77,15 +77,18 @@ void PieceManager::render(Renderer *renderer)
 {
   for (Piece *piece : pieces_)
   {
-    piece->render(renderer);
+    if (piece != nullptr)
+    {
+      piece->render(renderer);
+    }
   }
 }
 
 const std::vector<std::pair<uint8_t, uint8_t>> PieceManager::get_pieces_moves(const uint8_t id,
-                                                                              const std::vector<std::vector<int8_t>>& board)
-const
+                                                                              const std::vector<std::vector<int8_t>>& board,
+                                                                              const uint8_t turn) const
 {
-  return pieces_[id]->calculate_possible_moves(board);
+  return pieces_[id]->calculate_possible_moves(board, turn);
 }
 
 glm::vec2 PieceManager::get_piece_position(const uint8_t id) const
@@ -93,7 +96,18 @@ glm::vec2 PieceManager::get_piece_position(const uint8_t id) const
   return pieces_[id]->get_position();
 }
 
+Color PieceManager::get_piece_game_color(const uint8_t id) const
+{
+  return pieces_[id]->get_game_piece_color();
+}
+
 void PieceManager::move_piece(const uint8_t id, const glm::vec2 &position)
 {
   pieces_[id]->update_position(position);
+}
+
+void PieceManager::delete_piece(const uint8_t id)
+{
+  delete pieces_[id];
+  pieces_[id] = nullptr;
 }

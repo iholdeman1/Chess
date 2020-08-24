@@ -39,6 +39,7 @@ private:
   Renderer *renderer_ = nullptr;
   PieceManager *piece_manager_ = nullptr;
   
+  uint8_t turn_ = 1;
   bool mouse_down_ = false;
   uint8_t selected_piece_ = -1;
   glm::vec2 mouse_position_ = glm::vec2(1.0f);
