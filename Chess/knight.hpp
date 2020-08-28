@@ -48,7 +48,7 @@ public:
     }
     
     // Right-down
-    if (y+1 >= BOARD_MIN && x+2 <= BOARD_MAX && (board[y+1][x+2] == -1 || colors_are_different(board[y][x], board[y+1][x+2])))
+    if (y+1 <= BOARD_MAX && x+2 <= BOARD_MAX && (board[y+1][x+2] == -1 || colors_are_different(board[y][x], board[y+1][x+2])))
     {
       moves.push_back(std::pair<uint8_t, uint8_t>{y+1, x+2});
     }
