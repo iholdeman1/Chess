@@ -75,14 +75,17 @@ void Game::init()
   renderer_ = new Renderer();
 }
 
-void Game::process_input(const float delta_time)
-{
-  
-}
-
 void Game::update(const float delta_time)
 {
+  if (game_over_)
+  {
+    game_state_ = GameState::OVER;
+  }
   
+  if (game_state_ == GameState::ACTIVE && change_turn_)
+  {
+    turn_ = !turn_;
+  }
 }
 
 void Game::render()
@@ -103,29 +106,32 @@ void Game::handle_mouse_up(const double x, const double y)
 {
   if (mouse_down_)
   {
-    const uint8_t new_x = x/100;
-    const uint8_t new_y = y/100;
-    
-    if (selected_piece_ != -1 && board_->is_valid_move(new_y, new_x))
+    if (game_state_ == GameState::ACTIVE)
     {
-      if (board_->is_piece_at_square(new_x, new_y))
+      const uint8_t new_x = x/100;
+      const uint8_t new_y = y/100;
+      
+      if (selected_piece_ != -1 && board_->is_valid_move(new_y, new_x))
       {
-        piece_manager_->delete_piece(board_->get_piece_at_square(new_x, new_y));
+        if (board_->is_piece_at_square(new_x, new_y))
+        {
+          game_over_ = piece_manager_->is_piece_king(board_->get_piece_at_square(new_x, new_y));
+          piece_manager_->delete_piece(board_->get_piece_at_square(new_x, new_y));
+        }
+        const glm::vec2 old_position = piece_manager_->get_piece_position(selected_piece_);
+        board_->move_piece(glm::vec2(old_position.x/100, old_position.y/100), glm::vec2(new_x, new_y));
+        piece_manager_->move_piece(selected_piece_, glm::vec2(new_x*100, new_y*100));
+        selected_piece_ = -1;
+        change_turn_ = true;
       }
-      const glm::vec2 old_position = piece_manager_->get_piece_position(selected_piece_);
-      board_->move_piece(glm::vec2(old_position.x/100, old_position.y/100), glm::vec2(new_x, new_y));
-      piece_manager_->move_piece(selected_piece_, glm::vec2(new_x*100, new_y*100));
-      selected_piece_ = -1;
-      turn_ = !turn_;
+      else if (board_->is_piece_at_square(new_x, new_y) &&
+               piece_manager_->get_piece_game_color(board_->get_piece_at_square(new_x, new_y)) == static_cast<Color>(turn_))
+      {
+        selected_piece_ = board_->get_piece_at_square(new_x, new_y);
+        const auto moves = piece_manager_->get_pieces_moves(selected_piece_, board_->get_current_board(), turn_);
+        board_->accept_valid_moves(std::move(moves));
+      }
     }
-    else if (board_->is_piece_at_square(new_x, new_y) &&
-             piece_manager_->get_piece_game_color(board_->get_piece_at_square(new_x, new_y)) == static_cast<Color>(turn_))
-    {
-      selected_piece_ = board_->get_piece_at_square(new_x, new_y);
-      const auto moves = piece_manager_->get_pieces_moves(selected_piece_, board_->get_current_board(), turn_);
-      board_->accept_valid_moves(std::move(moves));
-    }
-    
     mouse_down_ = false;
   }
 }
