@@ -91,6 +91,11 @@ const std::vector<std::pair<uint8_t, uint8_t>> PieceManager::get_pieces_moves(co
   return pieces_[id]->calculate_possible_moves(board, turn);
 }
 
+bool PieceManager::is_piece_king(const uint8_t id) const
+{
+  return pieces_[id]->get_is_king();
+}
+
 glm::vec2 PieceManager::get_piece_position(const uint8_t id) const
 {
   return pieces_[id]->get_position();

@@ -71,6 +71,11 @@ public:
     return game_color_;
   }
   
+  bool get_is_king() const
+  {
+    return is_king_;
+  }
+  
   bool get_is_pawn() const
   {
     return is_pawn_;
@@ -271,8 +276,9 @@ protected:
   Color game_color_;
   Texture2D texture_;
   glm::vec3 color_;
-  bool has_moved_ = false;
+  bool is_king_ = false;
   bool is_pawn_ = false;
+  bool has_moved_ = false;
 };
 
 #endif /* piece_hpp */
