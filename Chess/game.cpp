@@ -92,6 +92,12 @@ void Game::render()
 {
   board_->render(renderer_);
   piece_manager_->render(renderer_);
+  
+  if (game_state_ == GameState::OVER)
+  {
+    renderer_->render_basic_object(glm::vec2(0, 0), glm::vec2(width_, height_),
+                                   glm::vec4(0.25f, 0.25f, 0.25f, 0.75f), 0.0f);
+  }
 }
 
 void Game::handle_mouse_down()
