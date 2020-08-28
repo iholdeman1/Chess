@@ -61,9 +61,19 @@ public:
     return position_;
   }
   
+  glm::vec2 get_size() const
+  {
+    return size_;
+  }
+  
   Color get_game_piece_color() const
   {
     return game_color_;
+  }
+  
+  bool get_is_pawn() const
+  {
+    return is_pawn_;
   }
   
   void update_position(const glm::vec2& position)
@@ -261,7 +271,8 @@ protected:
   Color game_color_;
   Texture2D texture_;
   glm::vec3 color_;
-  bool has_moved_;
+  bool has_moved_ = false;
+  bool is_pawn_ = false;
 };
 
 #endif /* piece_hpp */
