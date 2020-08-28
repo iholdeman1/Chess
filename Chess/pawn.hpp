@@ -19,6 +19,7 @@ public:
        Texture2D texture, const glm::vec3 color = glm::vec3(1.0))
   : Piece(std::move(position), std::move(size), std::move(game_color), std::move(texture), std::move(color))
   {
+    is_pawn_ = true;
   }
   
   std::vector<std::pair<uint8_t, uint8_t>> calculate_possible_moves(const std::vector<std::vector<int8_t>>& board, const uint8_t turn)

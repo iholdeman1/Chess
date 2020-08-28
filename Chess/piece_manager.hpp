@@ -45,6 +45,8 @@ public:
   void delete_piece(const uint8_t id);
   
 private:
+  void upgrade_pawn(const uint8_t id, const glm::vec2& position, const Color piece_color);
+  
   std::vector<Piece*> pieces_;
 };
 
