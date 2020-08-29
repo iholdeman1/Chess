@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		919A40CD24F9CD5400784031 /* text_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 919A40CB24F9CD5400784031 /* text_renderer.cpp */; };
+		919A40D124F9CF8D00784031 /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 919A40D024F9CF8D00784031 /* libfreetype.6.dylib */; };
 		91A51A6524E081ED000E65D6 /* piece_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91A51A6324E081ED000E65D6 /* piece_manager.cpp */; };
 		91E80C3424D5CFAE003AEFE2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91E80C3324D5CFAE003AEFE2 /* main.cpp */; };
 		91E80C3C24D5CFDB003AEFE2 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E80C3B24D5CFDB003AEFE2 /* OpenGL.framework */; };
@@ -44,6 +46,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		919A40CB24F9CD5400784031 /* text_renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = text_renderer.cpp; sourceTree = "<group>"; };
+		919A40CC24F9CD5400784031 /* text_renderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = text_renderer.hpp; sourceTree = "<group>"; };
+		919A40D024F9CF8D00784031 /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = ../../../../../usr/local/Cellar/freetype/2.9.1/lib/libfreetype.6.dylib; sourceTree = "<group>"; };
+		919A40D224F9CFF700784031 /* font.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = font.vert; sourceTree = "<group>"; };
+		919A40D324F9D00000784031 /* font.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = font.frag; sourceTree = "<group>"; };
+		919A40D424F9D53B00784031 /* OCRAEXT.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = OCRAEXT.TTF; sourceTree = "<group>"; };
 		91A51A6324E081ED000E65D6 /* piece_manager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = piece_manager.cpp; sourceTree = "<group>"; };
 		91A51A6424E081ED000E65D6 /* piece_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = piece_manager.hpp; sourceTree = "<group>"; };
 		91A51A6724E081F7000E65D6 /* piece.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = piece.hpp; sourceTree = "<group>"; };
@@ -93,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				919A40D124F9CF8D00784031 /* libfreetype.6.dylib in Frameworks */,
 				91E80C3F24D5D042003AEFE2 /* libglfw.3.3.dylib in Frameworks */,
 				91E80C3C24D5CFDB003AEFE2 /* OpenGL.framework in Frameworks */,
 			);
@@ -146,6 +155,8 @@
 				91A51A6C24E08276000E65D6 /* rook.hpp */,
 				91A51A6D24E08289000E65D6 /* bishop.hpp */,
 				91A51A6E24E0829A000E65D6 /* pawn.hpp */,
+				919A40CB24F9CD5400784031 /* text_renderer.cpp */,
+				919A40CC24F9CD5400784031 /* text_renderer.hpp */,
 			);
 			path = Chess;
 			sourceTree = "<group>";
@@ -153,6 +164,7 @@
 		91E80C3A24D5CFDB003AEFE2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				919A40D024F9CF8D00784031 /* libfreetype.6.dylib */,
 				91E80C3E24D5D042003AEFE2 /* libglfw.3.3.dylib */,
 				91E80C3B24D5CFDB003AEFE2 /* OpenGL.framework */,
 			);
@@ -166,6 +178,8 @@
 				91A51A7C24E09DA6000E65D6 /* texture.vert */,
 				91E80C5D24D7A9EB003AEFE2 /* board.frag */,
 				91E80C5E24D7A9EC003AEFE2 /* board.vert */,
+				919A40D224F9CFF700784031 /* font.vert */,
+				919A40D324F9D00000784031 /* font.frag */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -173,6 +187,7 @@
 		91E80C4324D617D9003AEFE2 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				919A40D424F9D53B00784031 /* OCRAEXT.TTF */,
 				91A51A7724E08BFC000E65D6 /* black_bishop_100.png */,
 				91A51A7824E08BFC000E65D6 /* black_king_100.png */,
 				91A51A7324E08BFC000E65D6 /* black_knight_100.png */,
@@ -249,6 +264,7 @@
 			files = (
 				91E80C5724D79D6D003AEFE2 /* shader.cpp in Sources */,
 				91E80C4B24D78848003AEFE2 /* renderer.cpp in Sources */,
+				919A40CD24F9CD5400784031 /* text_renderer.cpp in Sources */,
 				91A51A6524E081ED000E65D6 /* piece_manager.cpp in Sources */,
 				91E80C3424D5CFAE003AEFE2 /* main.cpp in Sources */,
 				91E80C5424D79C05003AEFE2 /* resource_manager.cpp in Sources */,
@@ -382,10 +398,13 @@
 					/usr/local/Cellar/glfw/3.3/include,
 					/usr/local/include/glm,
 					"/Users/ianholdeman/Downloads/stb-master",
+					"/usr/local/opt/freetype/include/freetype2/**",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/glfw/3.3/lib,
+					/usr/local/opt/freetype/lib,
+					/usr/local/Cellar/freetype/2.9.1/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -404,10 +423,13 @@
 					/usr/local/Cellar/glfw/3.3/include,
 					/usr/local/include/glm,
 					"/Users/ianholdeman/Downloads/stb-master",
+					"/usr/local/opt/freetype/include/freetype2/**",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/glfw/3.3/lib,
+					/usr/local/opt/freetype/lib,
+					/usr/local/Cellar/freetype/2.9.1/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

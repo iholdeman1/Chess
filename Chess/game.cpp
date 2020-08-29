@@ -39,6 +39,13 @@ void Game::init()
   ResourceManager::get_shader("texture").use();
   ResourceManager::get_shader("texture").set_matrix4("projection", projection);
   
+  // Set up the font shader
+  ResourceManager::load_shader("/Users/ianholdeman/Desktop/Develop/Chess/Chess/Shaders/font.vert",
+                               "/Users/ianholdeman/Desktop/Develop/Chess/Chess/Shaders/font.frag",
+                               nullptr, "font");
+  ResourceManager::get_shader("font").use();
+  ResourceManager::get_shader("font").set_matrix4("projection", projection);
+  
   // Load textures
   ResourceManager::load_texture("/Users/ianholdeman/Desktop/Develop/Chess/Chess/Assets/white_king_100.png",
                                 true, "white_king");
@@ -73,18 +80,55 @@ void Game::init()
   
   // Create the renderer
   renderer_ = new Renderer();
+  renderer_->load_font("/Users/ianholdeman/Desktop/Develop/Chess/Chess/Assets/OCRAEXT.TTF", 48);
 }
 
-void Game::update(const float delta_time)
+void Game::process_input()
+{
+  if (!mouse_up_)
+  {
+    return;
+  }
+  
+  if (game_state_ == GameState::ACTIVE)
+  {
+    const uint8_t new_x = mouse_position_.x/100;
+    const uint8_t new_y = mouse_position_.y/100;
+    
+    if (selected_piece_ != -1 && board_->is_valid_move(new_y, new_x))
+    {
+      if (board_->is_piece_at_square(new_x, new_y))
+      {
+        game_over_ = piece_manager_->is_piece_king(board_->get_piece_at_square(new_x, new_y));
+        piece_manager_->delete_piece(board_->get_piece_at_square(new_x, new_y));
+      }
+      const glm::vec2 old_position = piece_manager_->get_piece_position(selected_piece_);
+      board_->move_piece(glm::vec2(old_position.x/100, old_position.y/100), glm::vec2(new_x, new_y));
+      piece_manager_->move_piece(selected_piece_, glm::vec2(new_x*100, new_y*100));
+      selected_piece_ = -1;
+      change_turn_ = true;
+    }
+    else if (board_->is_piece_at_square(new_x, new_y) &&
+             piece_manager_->get_piece_game_color(board_->get_piece_at_square(new_x, new_y)) == static_cast<Color>(turn_))
+    {
+      selected_piece_ = board_->get_piece_at_square(new_x, new_y);
+      const auto moves = piece_manager_->get_pieces_moves(selected_piece_, board_->get_current_board(), turn_);
+      board_->accept_valid_moves(std::move(moves));
+    }
+  }
+  mouse_up_ = false;
+}
+
+void Game::update()
 {
   if (game_over_)
   {
     game_state_ = GameState::OVER;
   }
-  
-  if (game_state_ == GameState::ACTIVE && change_turn_)
+  else if (game_state_ == GameState::ACTIVE && change_turn_)
   {
     turn_ = !turn_;
+    change_turn_ = false;
   }
 }
 
@@ -97,6 +141,9 @@ void Game::render()
   {
     renderer_->render_basic_object(glm::vec2(0, 0), glm::vec2(width_, height_),
                                    glm::vec4(0.25f, 0.25f, 0.25f, 0.75f), 0.0f);
+    
+    const std::string color = turn_ == 1 ? "White" : "Black";
+    renderer_->render_font(color + " wins!", 170.0f, 375.0f, 1.5f);
   }
 }
 
@@ -112,32 +159,8 @@ void Game::handle_mouse_up(const double x, const double y)
 {
   if (mouse_down_)
   {
-    if (game_state_ == GameState::ACTIVE)
-    {
-      const uint8_t new_x = x/100;
-      const uint8_t new_y = y/100;
-      
-      if (selected_piece_ != -1 && board_->is_valid_move(new_y, new_x))
-      {
-        if (board_->is_piece_at_square(new_x, new_y))
-        {
-          game_over_ = piece_manager_->is_piece_king(board_->get_piece_at_square(new_x, new_y));
-          piece_manager_->delete_piece(board_->get_piece_at_square(new_x, new_y));
-        }
-        const glm::vec2 old_position = piece_manager_->get_piece_position(selected_piece_);
-        board_->move_piece(glm::vec2(old_position.x/100, old_position.y/100), glm::vec2(new_x, new_y));
-        piece_manager_->move_piece(selected_piece_, glm::vec2(new_x*100, new_y*100));
-        selected_piece_ = -1;
-        change_turn_ = true;
-      }
-      else if (board_->is_piece_at_square(new_x, new_y) &&
-               piece_manager_->get_piece_game_color(board_->get_piece_at_square(new_x, new_y)) == static_cast<Color>(turn_))
-      {
-        selected_piece_ = board_->get_piece_at_square(new_x, new_y);
-        const auto moves = piece_manager_->get_pieces_moves(selected_piece_, board_->get_current_board(), turn_);
-        board_->accept_valid_moves(std::move(moves));
-      }
-    }
+    mouse_up_ = true;
     mouse_down_ = false;
+    mouse_position_ = glm::vec2(x, y);
   }
 }
