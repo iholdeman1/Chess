@@ -44,12 +44,12 @@ public:
   bool is_piece_king(const uint8_t id) const;
   glm::vec2 get_piece_position(const uint8_t id) const;
   Color get_piece_game_color(const uint8_t id) const;
-  void move_piece(const uint8_t id, const glm::vec2& position);
+  bool move_piece(const uint8_t id, const glm::vec2& position);
   void delete_piece(const uint8_t id);
   void reset_pieces();
+  void upgrade_pawn(const uint8_t id, const uint8_t flag, const Texture2D texture);
   
 private:
-  void upgrade_pawn(const uint8_t id, const glm::vec2& position, const Color piece_color);
   void wipe_pieces();
   
   uint8_t piece_size_;

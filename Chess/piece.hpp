@@ -123,7 +123,7 @@ public:
       }
       case Direction::UP_RIGHT:
       {
-        while (y-count >= BOARD_MIN || x+count <= BOARD_MAX)
+        while (y-count >= BOARD_MIN && x+count <= BOARD_MAX)
         {
           if (board[y-count][x+count] == -1)
           {
@@ -163,7 +163,7 @@ public:
       }
       case Direction::DOWN_RIGHT:
       {
-        while (y+count <= BOARD_MAX || x+count <= BOARD_MAX)
+        while (y+count <= BOARD_MAX && x+count <= BOARD_MAX)
         {
           if (board[y+count][x+count] == -1)
           {
@@ -203,7 +203,7 @@ public:
       }
       case Direction::DOWN_LEFT:
       {
-        while (y+count >= BOARD_MIN || x-count >= BOARD_MAX)
+        while (y+count <= BOARD_MAX && x-count >= BOARD_MIN)
         {
           if (board[y+count][x-count] == -1)
           {
@@ -243,7 +243,7 @@ public:
       }
       case Direction::UP_LEFT:
       {
-        while (y-count >= BOARD_MIN || x-count >= BOARD_MIN)
+        while (y-count >= BOARD_MIN && x-count >= BOARD_MIN)
         {
           if (board[y-count][x-count] == -1)
           {

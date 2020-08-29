@@ -12,6 +12,7 @@
 // System Includes
 #include <stdint.h>
 #include <string>
+#include <vector>
 
 // Local Includes
 #include "board.hpp"
@@ -37,10 +38,19 @@ private:
   enum class GameState
   {
     ACTIVE = 0,
-    OVER = 1
+    IDLE = 1,
+    OVER = 2
+  };
+  
+  struct PawnOptions
+  {
+    Texture2D texture;
+    glm::vec2 position;
+    uint8_t flag;
   };
   
   void reset_game();
+  void handle_pawn_options(const uint32_t x, const uint32_t y);
   
   uint32_t width_, height_;
   Board *board_ = nullptr;
@@ -52,9 +62,12 @@ private:
   bool mouse_up_ = false;
   bool mouse_down_ = false;
   bool change_turn_ = false;
+  bool idle_mode_ = false;
+  uint8_t lucky_pawn_ = -1;
   uint8_t selected_piece_ = -1;
   GameState game_state_ = GameState::ACTIVE;
   glm::vec2 mouse_position_ = glm::vec2(1.0f);
+  std::vector<PawnOptions> pawn_options_;
 };
 
 #endif /* game_hpp */
