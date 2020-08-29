@@ -95,23 +95,30 @@ void Game::process_input()
     const uint8_t new_x = mouse_position_.x/100;
     const uint8_t new_y = mouse_position_.y/100;
     
+    // If moves already calculated and you clicked a valid move
     if (selected_piece_ != -1 && board_->is_valid_move(new_y, new_x))
     {
+      // If enemy capture
       if (board_->is_piece_at_square(new_x, new_y))
       {
         game_over_ = piece_manager_->is_piece_king(board_->get_piece_at_square(new_x, new_y));
         piece_manager_->delete_piece(board_->get_piece_at_square(new_x, new_y));
       }
+      // Move piece
       const glm::vec2 old_position = piece_manager_->get_piece_position(selected_piece_);
       board_->move_piece(glm::vec2(old_position.x/100, old_position.y/100), glm::vec2(new_x, new_y));
       idle_mode_ = piece_manager_->move_piece(selected_piece_, glm::vec2(new_x*100, new_y*100));
+      
+      // If pawn made it to the other end
       if (idle_mode_)
       {
         handle_pawn_options(new_x*100, new_y*100);
       }
+      
       selected_piece_ = -1;
       change_turn_ = true;
     }
+    // Calculate moves for piece
     else if (board_->is_piece_at_square(new_x, new_y) &&
              piece_manager_->get_piece_game_color(board_->get_piece_at_square(new_x, new_y)) == static_cast<Color>(turn_))
     {
@@ -127,6 +134,7 @@ void Game::process_input()
     
     for (const PawnOptions& pawn_option : pawn_options_)
     {
+      // If you clicked a pawn upgrade
       if (new_x == pawn_option.position.x && new_y == pawn_option.position.y)
       {
         piece_manager_->upgrade_pawn(lucky_pawn_, pawn_option.flag, pawn_option.texture);
@@ -172,13 +180,17 @@ void Game::render()
     renderer_->render_basic_object(glm::vec2(0, 0), glm::vec2(width_, height_),
                                    glm::vec4(0.25f, 0.25f, 0.25f, 0.75f), 0.0f);
     
+    // Get state of pawn
     const glm::vec2 pawn_position = piece_manager_->get_piece_position(lucky_pawn_);
     const std::string piece_color_str = piece_manager_->get_piece_game_color(lucky_pawn_) == Color::WHITE ? "white" : "black";
     const glm::vec4 color = glm::vec4(0.9f, 0.9f, 0.9f, 1.0);
+    
+    // Render pawn and white square behind it
     renderer_->render_basic_object(pawn_position, glm::vec2(100), color, 0.0f);
     renderer_->render_textured_object(ResourceManager::get_texture(piece_color_str + "_pawn"), pawn_position,
                                       glm::vec2(100), color, 0.0f);
     
+    // Render each pawn upgrade
     for (const PawnOptions& pawn_option : pawn_options_)
     {
       renderer_->render_basic_object(pawn_option.position, glm::vec2(100), color, 0.0f);
