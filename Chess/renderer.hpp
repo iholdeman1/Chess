@@ -18,6 +18,7 @@
 
 // Local Includes
 #include "resource_manager.hpp"
+#include "text_renderer.hpp"
 
 class Renderer
 {
@@ -31,10 +32,16 @@ public:
   void render_textured_object(const Texture2D& texture, const glm::vec2& position,
                               const glm::vec2& size, const glm::vec3& color, const float rotate);
   
+  void load_font(const std::string font, const uint8_t size);
+  
+  void render_font(const std::string text, float x, const float y,
+                   const float scale, const glm::vec4& color = glm::vec4(1.0f));
+  
 private:
   glm::mat4 generate_model_matrix(const glm::vec2& position, const glm::vec2& size, const float rotate);
-  
+
   uint32_t vao_ = 0;
+  TextRenderer *text_renderer_ = nullptr;
 };
 
 #endif /* renderer_hpp */

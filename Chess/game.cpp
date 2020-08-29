@@ -39,6 +39,13 @@ void Game::init()
   ResourceManager::get_shader("texture").use();
   ResourceManager::get_shader("texture").set_matrix4("projection", projection);
   
+  // Set up the font shader
+  ResourceManager::load_shader("/Users/ianholdeman/Desktop/Develop/Chess/Chess/Shaders/font.vert",
+                               "/Users/ianholdeman/Desktop/Develop/Chess/Chess/Shaders/font.frag",
+                               nullptr, "font");
+  ResourceManager::get_shader("font").use();
+  ResourceManager::get_shader("font").set_matrix4("projection", projection);
+  
   // Load textures
   ResourceManager::load_texture("/Users/ianholdeman/Desktop/Develop/Chess/Chess/Assets/white_king_100.png",
                                 true, "white_king");
@@ -73,6 +80,7 @@ void Game::init()
   
   // Create the renderer
   renderer_ = new Renderer();
+  renderer_->load_font("/Users/ianholdeman/Desktop/Develop/Chess/Chess/Assets/OCRAEXT.TTF", 24);
 }
 
 void Game::update(const float delta_time)

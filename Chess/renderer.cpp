@@ -42,11 +42,15 @@ Renderer::Renderer()
   // Un-bind our objects
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindVertexArray(0);
+  
+  // Set up the text renderer
+  text_renderer_ = new TextRenderer();
 }
 
 Renderer::~Renderer()
 {
   glDeleteVertexArrays(1, &vao_);
+  delete text_renderer_;
 }
 
 void Renderer::render_basic_object(const glm::vec2& position, const glm::vec2& size,
@@ -91,6 +95,17 @@ void Renderer::render_textured_object(const Texture2D& texture, const glm::vec2&
   // Render
   glDrawArrays(GL_TRIANGLES, 0, 6);
   glBindVertexArray(0);
+}
+
+void Renderer::load_font(const std::string font, const uint8_t size)
+{
+  text_renderer_->load(font, size);
+}
+
+void Renderer::render_font(const std::string text, float x, const float y,
+                           const float scale, const glm::vec4& color)
+{
+  text_renderer_->render_text(text, x, y, scale, color);
 }
 
 glm::mat4 Renderer::generate_model_matrix(const glm::vec2& position, const glm::vec2& size, const float rotate)
