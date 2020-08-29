@@ -85,11 +85,6 @@ int main()
   // Game loop
   while (!glfwWindowShouldClose(window))
   {
-    // Timing logic
-//    const float current_frame = glfwGetTime();
-//    delta_time = current_frame - last_frame;
-//    last_frame = current_frame;
-    
     // Handle inputs
     glfwPollEvents();
     
