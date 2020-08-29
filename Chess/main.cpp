@@ -86,15 +86,16 @@ int main()
   while (!glfwWindowShouldClose(window))
   {
     // Timing logic
-    const float current_frame = glfwGetTime();
-    delta_time = current_frame - last_frame;
-    last_frame = current_frame;
+//    const float current_frame = glfwGetTime();
+//    delta_time = current_frame - last_frame;
+//    last_frame = current_frame;
     
     // Handle inputs
     glfwPollEvents();
     
     // Update
-    chess.update(delta_time);
+    chess.process_input();
+    chess.update();
     
     // Reset color buffer
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);

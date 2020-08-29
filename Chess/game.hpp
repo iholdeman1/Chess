@@ -26,7 +26,8 @@ public:
   ~Game();
   
   void init();
-  void update(const float delta_time);
+  void process_input();
+  void update();
   void render();
   
   void handle_mouse_down();
@@ -46,6 +47,7 @@ private:
   
   uint8_t turn_ = 1;
   bool game_over_ = false;
+  bool mouse_up_ = false;
   bool mouse_down_ = false;
   bool change_turn_ = false;
   uint8_t selected_piece_ = -1;
