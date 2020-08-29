@@ -30,8 +30,10 @@ public:
   bool is_valid_move(const uint8_t x, const uint8_t y) const;
   void accept_valid_moves(const std::vector<std::pair<uint8_t, uint8_t>> moves);
   void move_piece(const glm::vec2& old_position, const glm::vec2& new_position);
+  void reset_board();
   
 private:
+  void initialize_board();
   void clear_moves();
   
   uint32_t width_;

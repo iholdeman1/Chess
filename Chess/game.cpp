@@ -116,6 +116,10 @@ void Game::process_input()
       board_->accept_valid_moves(std::move(moves));
     }
   }
+  else if (game_state_ == GameState::OVER)
+  {
+    reset_game();
+  }
   mouse_up_ = false;
 }
 
@@ -139,11 +143,16 @@ void Game::render()
   
   if (game_state_ == GameState::OVER)
   {
+    // Gray overlay
     renderer_->render_basic_object(glm::vec2(0, 0), glm::vec2(width_, height_),
                                    glm::vec4(0.25f, 0.25f, 0.25f, 0.75f), 0.0f);
     
+    // Winner
     const std::string color = turn_ == 1 ? "White" : "Black";
     renderer_->render_font(color + " wins!", 170.0f, 375.0f, 1.5f);
+    
+    // Click anywhere message
+    renderer_->render_font("Click anywhere to play again!", 190.0f, 450.0f, 0.5f);
   }
 }
 
@@ -163,4 +172,18 @@ void Game::handle_mouse_up(const double x, const double y)
     mouse_down_ = false;
     mouse_position_ = glm::vec2(x, y);
   }
+}
+
+void Game::reset_game()
+{
+  // Reset objects
+  board_->reset_board();
+  piece_manager_->reset_pieces();
+  
+  // Reset state
+  turn_ = 1;
+  game_over_ = false;
+  change_turn_ = false;
+  selected_piece_ = -1;
+  game_state_ = GameState::ACTIVE;
 }

@@ -40,6 +40,8 @@ private:
     OVER = 1
   };
   
+  void reset_game();
+  
   uint32_t width_, height_;
   Board *board_ = nullptr;
   Renderer *renderer_ = nullptr;
