@@ -106,17 +106,16 @@ Color PieceManager::get_piece_game_color(const uint8_t id) const
   return pieces_[id]->get_game_piece_color();
 }
 
-void PieceManager::move_piece(const uint8_t id, const glm::vec2 &position)
+bool PieceManager::move_piece(const uint8_t id, const glm::vec2 &position)
 {
   pieces_[id]->update_position(position);
   
   const glm::vec2 new_position = pieces_[id]->get_position();
   const Color piece_color = pieces_[id]->get_game_piece_color();
-  if (pieces_[id]->get_is_pawn() && ((piece_color == Color::WHITE && new_position.y == 0) ||
-                                     (piece_color == Color::BLACK && new_position.y == 700)))
-  {
-    upgrade_pawn(id, new_position, piece_color);
-  }
+  
+  return (pieces_[id]->get_is_pawn() && ((piece_color == Color::WHITE && new_position.y == 0) ||
+                                         (piece_color == Color::BLACK && new_position.y == 700)));
+    // upgrade_pawn(id, new_position, piece_color);
 }
 
 void PieceManager::delete_piece(const uint8_t id)
@@ -131,13 +130,30 @@ void PieceManager::reset_pieces()
   initialize_pieces();
 }
 
-void PieceManager::upgrade_pawn(const uint8_t id, const glm::vec2& position, const Color piece_color)
+void PieceManager::upgrade_pawn(const uint8_t id, const uint8_t flag, const Texture2D texture)
 {
+  const glm::vec2 position = pieces_[id]->get_position();
   const glm::vec2 size = pieces_[id]->get_size();
+  const Color piece_color = pieces_[id]->get_game_piece_color();
   delete_piece(id);
-  const Texture2D texture = piece_color == Color::WHITE ? ResourceManager::get_texture("white_queen") :
-                                                          ResourceManager::get_texture("black_queen");
-  pieces_[id] = new Queen(position, size, piece_color, texture);
+  
+  switch (flag)
+  {
+    case 0:
+      pieces_[id] = new Queen(position, size, piece_color, texture);
+      break;
+    case 1:
+      pieces_[id] = new Rook(position, size, piece_color, texture);
+      break;
+    case 2:
+      pieces_[id] = new Bishop(position, size, piece_color, texture);
+      break;
+    case 3:
+      pieces_[id] = new Knight(position, size, piece_color, texture);
+      break;
+    default:
+      break;
+  }
 }
 
 void PieceManager::wipe_pieces()
