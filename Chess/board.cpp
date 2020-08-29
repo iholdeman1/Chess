@@ -12,20 +12,7 @@ Board::Board(const uint32_t width, const uint32_t height) : width_(width), heigh
 {
   board_ = std::vector<std::vector<int8_t>>(8, std::vector<int8_t>(8, -1));
   square_size_ = width_ / 8;
-  
-  // Initialized board with expected piece ids
-  uint8_t id_count = 0;
-  for (uint8_t i = 0; i < 8; i++)
-  {
-    for (uint8_t j = 0; j < 8; j++)
-    {
-      if (i == 0 || i == 1 || i == 6 || i == 7)
-      {
-        board_[i][j] = id_count;
-        id_count++;
-      }
-    }
-  }
+  initialize_board();
 }
 
 void Board::render(Renderer *renderer)
@@ -86,6 +73,29 @@ void Board::move_piece(const glm::vec2& old_position, const glm::vec2& new_posit
   board_[new_position.y][new_position.x] = board_[old_position.y][old_position.x];
   board_[old_position.y][old_position.x] = -1;
   clear_moves();
+}
+
+void Board::reset_board()
+{
+  initialize_board();
+  clear_moves();
+}
+
+void Board::initialize_board()
+{
+  // Initialized board with expected piece ids
+  uint8_t id_count = 0;
+  for (uint8_t i = 0; i < 8; i++)
+  {
+    for (uint8_t j = 0; j < 8; j++)
+    {
+      if (i == 0 || i == 1 || i == 6 || i == 7)
+      {
+        board_[i][j] = id_count;
+        id_count++;
+      }
+    }
+  }
 }
 
 void Board::clear_moves()

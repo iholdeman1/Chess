@@ -36,6 +36,8 @@ public:
   
   void render(Renderer *renderer);
   
+  void initialize_pieces();
+  
   const std::vector<std::pair<uint8_t, uint8_t>> get_pieces_moves(const uint8_t id,
                                                                   const std::vector<std::vector<int8_t>>& board,
                                                                   const uint8_t turn) const;
@@ -44,10 +46,13 @@ public:
   Color get_piece_game_color(const uint8_t id) const;
   void move_piece(const uint8_t id, const glm::vec2& position);
   void delete_piece(const uint8_t id);
+  void reset_pieces();
   
 private:
   void upgrade_pawn(const uint8_t id, const glm::vec2& position, const Color piece_color);
+  void wipe_pieces();
   
+  uint8_t piece_size_;
   std::vector<Piece*> pieces_;
 };
 
